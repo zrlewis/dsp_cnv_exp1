@@ -1,0 +1,33 @@
+<Header>
+FileVersion,0.02
+SoftwareVersion,"GeoMx_NGS_Pipeline_ 2.0.0"
+Date,2020-6-15
+</Header>
+
+<Scan_Attributes>
+ID,DSP-1001660008440-A01
+Plate_ID,1001660008440
+Well,A01
+</Scan_Attributes>
+
+<NGS_Processing_Attributes>
+SeqSetId,
+tamperedIni,No
+trimGaloreOpts = " --hardtrim5 26 --dont_gzip"
+flash2Opts = " -m 26 -e 26 -f 26 -s 1 -r 27"
+umiExtractOpts = " --bc-pattern=NNNNNNNNNNNNNN"
+bowtie2Opts = " --end-to-end -L 4 --trim5 0 --trim3 0 --norc"
+umiDedupOpts = " --edit-distance-threshold=1"
+keepStepFiles = False
+Raw,545641
+Trimmed,533607
+Stitched,1548
+Aligned,1
+umiQ30,0.9920
+rtsQ30,0.9899
+</NGS_Processing_Attributes>
+
+
+<Code_Summary>
+RTS0108729,1
+</Code_Summary>

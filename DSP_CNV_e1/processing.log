@@ -1,0 +1,1565 @@
+2020-11-24 18:22:25.5318 Info 
+Build version: "2.0.0.16" 
+ 
+2020-11-24 18:22:25.5836 Info RAM available: 63. CPU count: 8 
+ 
+2020-11-24 18:22:25.5865 Info Parsing processing settings from ini file... 
+ 
+2020-11-24 18:22:25.6070 Info Ini parsed successfully. 
+ 
+2020-11-24 18:22:25.9859 Info Processing FASTQ with next params: Input dir path: /var/dnd/data/190f952c-230d-43e4-8aae-544246b95a53/FASTQ
+Outpur dir path: /var/dnd/data/190f952c-230d-43e4-8aae-544246b95a53/results
+.ini file path: /var/dnd/data/190f952c-230d-43e4-8aae-544246b95a53/config.ini
+Project name: 
+Quality trim score: 20
+2color quality trimming: False
+Adapter 1: 
+Adapter 2: 
+Adapter trim match length: 10
+Adapter trim max mismatch: 3
+Stitching max mismatch: 2
+Stitch shift: True
+Skip stitching: False
+Barcode max mismatch: 1
+Dedup HD: 1
+Dedup reads limit: 2000000000
+Parallel threads count: 4
+Save interim files: False
+Translation file: 
+Single FASTQ processing mode: False
+Use single read if stitching failed: False
+Verbose stats output: False
+Create DCC metadata: False
+Mode: Process
+ 
+ 
+2020-11-24 18:22:26.3965 Info Processing sample: DSP-1001660008440-A03 
+ 
+2020-11-24 18:22:26.3965 Info Processing sample: DSP-1001660008440-A02 
+ 
+2020-11-24 18:22:26.3965 Info Processing sample: DSP-1001660008440-A01 
+ 
+2020-11-24 18:22:26.3965 Info Processing sample: DSP-1001660008440-A04 
+ 
+2020-11-24 18:22:30.5080 Info Deduplicating reads for sample DSP-1001660008440-A01 
+ 
+2020-11-24 18:22:30.5215 Info Deduplication progress for sample DSP-1001660008440-A01 is 54.17 %. 
+ 
+2020-11-24 18:22:30.5215 Info DSP-1001660008440-A01 deduplicated in 14 ms 
+ 
+2020-11-24 18:22:30.5468 Info DSP-1001660008440-A01 processed in 4128 ms 
+ 
+2020-11-24 18:22:30.5468 Info Processing sample: DSP-1001660008440-A05 
+ 
+2020-11-24 18:22:31.1785 Info Deduplicating reads for sample DSP-1001660008440-A05 
+ 
+2020-11-24 18:22:31.1917 Info DSP-1001660008440-A05 deduplicated in 11 ms 
+ 
+2020-11-24 18:22:31.1942 Info DSP-1001660008440-A05 processed in 644 ms 
+ 
+2020-11-24 18:22:31.1942 Info Processing sample: DSP-1001660008440-A06 
+ 
+2020-11-24 18:22:38.0399 Info FASTQ read progress for sample DSP-1001660008440-A04 is 96.91 %. 
+ 
+2020-11-24 18:22:38.1806 Info FASTQ read progress for sample DSP-1001660008440-A03 is 62.20 %. 
+ 
+2020-11-24 18:22:38.3259 Info FASTQ read progress for sample DSP-1001660008440-A02 is 10.79 %. 
+ 
+2020-11-24 18:22:38.4364 Info Deduplicating reads for sample DSP-1001660008440-A04 
+ 
+2020-11-24 18:22:38.5739 Info DSP-1001660008440-A04 deduplicated in 136 ms 
+ 
+2020-11-24 18:22:38.5739 Info DSP-1001660008440-A04 processed in 12179 ms 
+ 
+2020-11-24 18:22:38.5804 Info Processing sample: DSP-1001660008440-A07 
+ 
+2020-11-24 18:22:42.5144 Info FASTQ read progress for sample DSP-1001660008440-A06 is 15.51 %. 
+ 
+2020-11-24 18:22:44.7085 Info Deduplicating reads for sample DSP-1001660008440-A03 
+ 
+2020-11-24 18:22:45.6165 Info DSP-1001660008440-A03 deduplicated in 906 ms 
+ 
+2020-11-24 18:22:45.6192 Info DSP-1001660008440-A03 processed in 19222 ms 
+ 
+2020-11-24 18:22:45.6218 Info Processing sample: DSP-1001660008440-A08 
+ 
+2020-11-24 18:22:47.2542 Info Deduplicating reads for sample DSP-1001660008440-A08 
+ 
+2020-11-24 18:22:47.2667 Info DSP-1001660008440-A08 deduplicated in 11 ms 
+ 
+2020-11-24 18:22:47.2667 Info DSP-1001660008440-A08 processed in 1647 ms 
+ 
+2020-11-24 18:22:47.2716 Info Processing sample: DSP-1001660008440-A09 
+ 
+2020-11-24 18:22:47.7909 Info Deduplicating reads for sample DSP-1001660008440-A07 
+ 
+2020-11-24 18:22:47.9121 Info DSP-1001660008440-A07 deduplicated in 120 ms 
+ 
+2020-11-24 18:22:47.9141 Info DSP-1001660008440-A07 processed in 9333 ms 
+ 
+2020-11-24 18:22:47.9141 Info Processing sample: DSP-1001660008440-A10 
+ 
+2020-11-24 18:22:49.4992 Info FASTQ read progress for sample DSP-1001660008440-A02 is 21.54 %. 
+ 
+2020-11-24 18:22:53.8775 Info FASTQ read progress for sample DSP-1001660008440-A06 is 30.92 %. 
+ 
+2020-11-24 18:22:58.4315 Info FASTQ read progress for sample DSP-1001660008440-A09 is 28.55 %. 
+ 
+2020-11-24 18:22:59.1153 Info FASTQ read progress for sample DSP-1001660008440-A10 is 19.53 %. 
+ 
+2020-11-24 18:23:00.5345 Info FASTQ read progress for sample DSP-1001660008440-A02 is 32.28 %. 
+ 
+2020-11-24 18:23:04.6696 Info FASTQ read progress for sample DSP-1001660008440-A06 is 46.12 %. 
+ 
+2020-11-24 18:23:09.0024 Info FASTQ read progress for sample DSP-1001660008440-A09 is 56.97 %. 
+ 
+2020-11-24 18:23:09.8661 Info FASTQ read progress for sample DSP-1001660008440-A10 is 38.92 %. 
+ 
+2020-11-24 18:23:11.2403 Info FASTQ read progress for sample DSP-1001660008440-A02 is 42.84 %. 
+ 
+2020-11-24 18:23:15.3679 Info FASTQ read progress for sample DSP-1001660008440-A06 is 61.81 %. 
+ 
+2020-11-24 18:23:19.6679 Info FASTQ read progress for sample DSP-1001660008440-A09 is 86.17 %. 
+ 
+2020-11-24 18:23:20.5913 Info FASTQ read progress for sample DSP-1001660008440-A10 is 58.45 %. 
+ 
+2020-11-24 18:23:21.9605 Info FASTQ read progress for sample DSP-1001660008440-A02 is 53.54 %. 
+ 
+2020-11-24 18:23:24.8086 Info Deduplicating reads for sample DSP-1001660008440-A09 
+ 
+2020-11-24 18:23:25.6242 Info DSP-1001660008440-A09 deduplicated in 815 ms 
+ 
+2020-11-24 18:23:25.6256 Info DSP-1001660008440-A09 processed in 38354 ms 
+ 
+2020-11-24 18:23:25.6256 Info Processing sample: DSP-1001660008440-A11 
+ 
+2020-11-24 18:23:26.2648 Info FASTQ read progress for sample DSP-1001660008440-A06 is 77.65 %. 
+ 
+2020-11-24 18:23:31.7830 Info FASTQ read progress for sample DSP-1001660008440-A10 is 78.42 %. 
+ 
+2020-11-24 18:23:33.0865 Info FASTQ read progress for sample DSP-1001660008440-A02 is 64.59 %. 
+ 
+2020-11-24 18:23:36.6486 Info FASTQ read progress for sample DSP-1001660008440-A11 is 43.24 %. 
+ 
+2020-11-24 18:23:37.3467 Info FASTQ read progress for sample DSP-1001660008440-A06 is 93.34 %. 
+ 
+2020-11-24 18:23:41.9246 Info Deduplicating reads for sample DSP-1001660008440-A06 
+ 
+2020-11-24 18:23:42.6390 Info FASTQ read progress for sample DSP-1001660008440-A10 is 98.14 %. 
+ 
+2020-11-24 18:23:42.9632 Info DSP-1001660008440-A06 deduplicated in 1038 ms 
+ 
+2020-11-24 18:23:42.9632 Info DSP-1001660008440-A06 processed in 71768 ms 
+ 
+2020-11-24 18:23:42.9668 Info Processing sample: DSP-1001660008440-B01 
+ 
+2020-11-24 18:23:43.7511 Info Deduplicating reads for sample DSP-1001660008440-A10 
+ 
+2020-11-24 18:23:44.0662 Info FASTQ read progress for sample DSP-1001660008440-A02 is 75.62 %. 
+ 
+2020-11-24 18:23:44.8143 Info DSP-1001660008440-A10 deduplicated in 1062 ms 
+ 
+2020-11-24 18:23:44.8143 Info DSP-1001660008440-A10 processed in 56899 ms 
+ 
+2020-11-24 18:23:44.8176 Info Processing sample: DSP-1001660008440-B03 
+ 
+2020-11-24 18:23:47.8681 Info FASTQ read progress for sample DSP-1001660008440-A11 is 87.53 %. 
+ 
+2020-11-24 18:23:51.1082 Info Deduplicating reads for sample DSP-1001660008440-A11 
+ 
+2020-11-24 18:23:51.9086 Info DSP-1001660008440-A11 deduplicated in 799 ms 
+ 
+2020-11-24 18:23:51.9101 Info DSP-1001660008440-A11 processed in 26282 ms 
+ 
+2020-11-24 18:23:51.9101 Info Processing sample: DSP-1001660008440-A12 
+ 
+2020-11-24 18:23:54.4693 Info FASTQ read progress for sample DSP-1001660008440-B01 is 20.15 %. 
+ 
+2020-11-24 18:23:55.6203 Info FASTQ read progress for sample DSP-1001660008440-A02 is 86.60 %. 
+ 
+2020-11-24 18:23:56.2675 Info FASTQ read progress for sample DSP-1001660008440-B03 is 28.19 %. 
+ 
+2020-11-24 18:24:02.9357 Info FASTQ read progress for sample DSP-1001660008440-A12 is 23.34 %. 
+ 
+2020-11-24 18:24:05.3023 Info FASTQ read progress for sample DSP-1001660008440-B01 is 40.14 %. 
+ 
+2020-11-24 18:24:06.3552 Info FASTQ read progress for sample DSP-1001660008440-A02 is 97.42 %. 
+ 
+2020-11-24 18:24:07.0321 Info FASTQ read progress for sample DSP-1001660008440-B03 is 56.20 %. 
+ 
+2020-11-24 18:24:08.8918 Info Deduplicating reads for sample DSP-1001660008440-A02 
+ 
+2020-11-24 18:24:10.5039 Info DSP-1001660008440-A02 deduplicated in 1611 ms 
+ 
+2020-11-24 18:24:10.5039 Info DSP-1001660008440-A02 processed in 104108 ms 
+ 
+2020-11-24 18:24:10.5068 Info Processing sample: DSP-1001660008440-B05 
+ 
+2020-11-24 18:24:14.0981 Info FASTQ read progress for sample DSP-1001660008440-A12 is 46.32 %. 
+ 
+2020-11-24 18:24:16.5951 Info FASTQ read progress for sample DSP-1001660008440-B01 is 60.36 %. 
+ 
+2020-11-24 18:24:18.3322 Info FASTQ read progress for sample DSP-1001660008440-B03 is 84.98 %. 
+ 
+2020-11-24 18:24:21.6783 Info FASTQ read progress for sample DSP-1001660008440-B05 is 19.02 %. 
+ 
+2020-11-24 18:24:24.1258 Info Deduplicating reads for sample DSP-1001660008440-B03 
+ 
+2020-11-24 18:24:24.8405 Info DSP-1001660008440-B03 deduplicated in 714 ms 
+ 
+2020-11-24 18:24:24.8464 Info DSP-1001660008440-B03 processed in 40024 ms 
+ 
+2020-11-24 18:24:24.8464 Info Processing sample: DSP-1001660008440-B04 
+ 
+2020-11-24 18:24:25.0022 Info FASTQ read progress for sample DSP-1001660008440-A12 is 70.05 %. 
+ 
+2020-11-24 18:24:27.7178 Info FASTQ read progress for sample DSP-1001660008440-B01 is 80.94 %. 
+ 
+2020-11-24 18:24:32.9196 Info FASTQ read progress for sample DSP-1001660008440-B05 is 37.92 %. 
+ 
+2020-11-24 18:24:35.9472 Info FASTQ read progress for sample DSP-1001660008440-B04 is 18.47 %. 
+ 
+2020-11-24 18:24:37.8843 Info Deduplicating reads for sample DSP-1001660008440-B01 
+ 
+2020-11-24 18:24:38.7673 Info DSP-1001660008440-B01 deduplicated in 882 ms 
+ 
+2020-11-24 18:24:38.7673 Info DSP-1001660008440-B01 processed in 55802 ms 
+ 
+2020-11-24 18:24:38.7702 Info Processing sample: DSP-1001660008440-B02 
+ 
+2020-11-24 18:24:39.0608 Info Deduplicating reads for sample DSP-1001660008440-A12 
+ 
+2020-11-24 18:24:39.7259 Info DSP-1001660008440-A12 deduplicated in 664 ms 
+ 
+2020-11-24 18:24:39.7259 Info DSP-1001660008440-A12 processed in 47815 ms 
+ 
+2020-11-24 18:24:39.7294 Info Processing sample: DSP-1001660008440-B06 
+ 
+2020-11-24 18:24:44.2578 Info FASTQ read progress for sample DSP-1001660008440-B05 is 56.89 %. 
+ 
+2020-11-24 18:24:47.3995 Info FASTQ read progress for sample DSP-1001660008440-B04 is 36.78 %. 
+ 
+2020-11-24 18:24:50.1869 Info FASTQ read progress for sample DSP-1001660008440-B02 is 19.59 %. 
+ 
+2020-11-24 18:24:51.1289 Info FASTQ read progress for sample DSP-1001660008440-B06 is 19.58 %. 
+ 
+2020-11-24 18:24:55.1313 Info FASTQ read progress for sample DSP-1001660008440-B05 is 76.38 %. 
+ 
+2020-11-24 18:24:58.1331 Info FASTQ read progress for sample DSP-1001660008440-B04 is 55.13 %. 
+ 
+2020-11-24 18:25:00.9270 Info FASTQ read progress for sample DSP-1001660008440-B02 is 39.03 %. 
+ 
+2020-11-24 18:25:01.9164 Info FASTQ read progress for sample DSP-1001660008440-B06 is 39.00 %. 
+ 
+2020-11-24 18:25:05.8913 Info FASTQ read progress for sample DSP-1001660008440-B05 is 95.69 %. 
+ 
+2020-11-24 18:25:08.2892 Info Deduplicating reads for sample DSP-1001660008440-B05 
+ 
+2020-11-24 18:25:08.8680 Info FASTQ read progress for sample DSP-1001660008440-B04 is 74.19 %. 
+ 
+2020-11-24 18:25:09.2197 Info DSP-1001660008440-B05 deduplicated in 929 ms 
+ 
+2020-11-24 18:25:09.2221 Info DSP-1001660008440-B05 processed in 58714 ms 
+ 
+2020-11-24 18:25:09.2221 Info Processing sample: DSP-1001660008440-B08 
+ 
+2020-11-24 18:25:12.0058 Info FASTQ read progress for sample DSP-1001660008440-B02 is 58.55 %. 
+ 
+2020-11-24 18:25:13.0834 Info FASTQ read progress for sample DSP-1001660008440-B06 is 58.60 %. 
+ 
+2020-11-24 18:25:20.2530 Info FASTQ read progress for sample DSP-1001660008440-B04 is 93.04 %. 
+ 
+2020-11-24 18:25:20.5387 Info FASTQ read progress for sample DSP-1001660008440-B08 is 13.62 %. 
+ 
+2020-11-24 18:25:23.0163 Info FASTQ read progress for sample DSP-1001660008440-B02 is 78.58 %. 
+ 
+2020-11-24 18:25:24.0543 Info FASTQ read progress for sample DSP-1001660008440-B06 is 78.63 %. 
+ 
+2020-11-24 18:25:24.2657 Info Deduplicating reads for sample DSP-1001660008440-B04 
+ 
+2020-11-24 18:25:25.1266 Info DSP-1001660008440-B04 deduplicated in 860 ms 
+ 
+2020-11-24 18:25:25.1266 Info DSP-1001660008440-B04 processed in 60279 ms 
+ 
+2020-11-24 18:25:25.1297 Info Processing sample: DSP-1001660008440-B09 
+ 
+2020-11-24 18:25:31.7816 Info FASTQ read progress for sample DSP-1001660008440-B08 is 27.20 %. 
+ 
+2020-11-24 18:25:34.1862 Info FASTQ read progress for sample DSP-1001660008440-B02 is 98.30 %. 
+ 
+2020-11-24 18:25:35.1324 Info Deduplicating reads for sample DSP-1001660008440-B02 
+ 
+2020-11-24 18:25:35.3608 Info FASTQ read progress for sample DSP-1001660008440-B06 is 98.41 %. 
+ 
+2020-11-24 18:25:36.0080 Info DSP-1001660008440-B02 deduplicated in 875 ms 
+ 
+2020-11-24 18:25:36.0095 Info DSP-1001660008440-B02 processed in 57239 ms 
+ 
+2020-11-24 18:25:36.0095 Info Processing sample: DSP-1001660008440-B11 
+ 
+2020-11-24 18:25:36.2676 Info Deduplicating reads for sample DSP-1001660008440-B06 
+ 
+2020-11-24 18:25:36.4426 Info FASTQ read progress for sample DSP-1001660008440-B09 is 16.27 %. 
+ 
+2020-11-24 18:25:36.7303 Info Deduplicating reads for sample DSP-1001660008440-B11 
+ 
+2020-11-24 18:25:36.7414 Info DSP-1001660008440-B11 deduplicated in 10 ms 
+ 
+2020-11-24 18:25:36.7414 Info DSP-1001660008440-B11 processed in 732 ms 
+ 
+2020-11-24 18:25:36.7414 Info Processing sample: DSP-1001660008440-B12 
+ 
+2020-11-24 18:25:37.3293 Info DSP-1001660008440-B06 deduplicated in 1061 ms 
+ 
+2020-11-24 18:25:37.3308 Info DSP-1001660008440-B06 processed in 57601 ms 
+ 
+2020-11-24 18:25:37.3308 Info Processing sample: DSP-1001660008440-B07 
+ 
+2020-11-24 18:25:43.0954 Info FASTQ read progress for sample DSP-1001660008440-B08 is 40.60 %. 
+ 
+2020-11-24 18:25:47.8287 Info FASTQ read progress for sample DSP-1001660008440-B09 is 32.42 %. 
+ 
+2020-11-24 18:25:48.0032 Info FASTQ read progress for sample DSP-1001660008440-B12 is 21.93 %. 
+ 
+2020-11-24 18:25:48.5873 Info FASTQ read progress for sample DSP-1001660008440-B07 is 30.40 %. 
+ 
+2020-11-24 18:25:53.9916 Info FASTQ read progress for sample DSP-1001660008440-B08 is 54.11 %. 
+ 
+2020-11-24 18:25:58.5297 Info FASTQ read progress for sample DSP-1001660008440-B09 is 48.27 %. 
+ 
+2020-11-24 18:25:58.7196 Info FASTQ read progress for sample DSP-1001660008440-B12 is 43.59 %. 
+ 
+2020-11-24 18:25:59.3186 Info FASTQ read progress for sample DSP-1001660008440-B07 is 60.72 %. 
+ 
+2020-11-24 18:26:04.6867 Info FASTQ read progress for sample DSP-1001660008440-B08 is 68.06 %. 
+ 
+2020-11-24 18:26:09.2812 Info FASTQ read progress for sample DSP-1001660008440-B09 is 64.85 %. 
+ 
+2020-11-24 18:26:09.4593 Info FASTQ read progress for sample DSP-1001660008440-B12 is 65.79 %. 
+ 
+2020-11-24 18:26:09.9882 Info FASTQ read progress for sample DSP-1001660008440-B07 is 91.64 %. 
+ 
+2020-11-24 18:26:12.8856 Info Deduplicating reads for sample DSP-1001660008440-B07 
+ 
+2020-11-24 18:26:13.3968 Info DSP-1001660008440-B07 deduplicated in 510 ms 
+ 
+2020-11-24 18:26:13.3982 Info DSP-1001660008440-B07 processed in 36065 ms 
+ 
+2020-11-24 18:26:13.3982 Info Processing sample: DSP-1001660008440-C01 
+ 
+2020-11-24 18:26:15.5180 Info FASTQ read progress for sample DSP-1001660008440-B08 is 81.98 %. 
+ 
+2020-11-24 18:26:20.1745 Info FASTQ read progress for sample DSP-1001660008440-B09 is 81.44 %. 
+ 
+2020-11-24 18:26:20.2788 Info FASTQ read progress for sample DSP-1001660008440-B12 is 88.16 %. 
+ 
+2020-11-24 18:26:22.7528 Info Deduplicating reads for sample DSP-1001660008440-C01 
+ 
+2020-11-24 18:26:22.8885 Info DSP-1001660008440-C01 deduplicated in 135 ms 
+ 
+2020-11-24 18:26:22.8900 Info DSP-1001660008440-C01 processed in 9490 ms 
+ 
+2020-11-24 18:26:22.8900 Info Processing sample: DSP-1001660008440-C02 
+ 
+2020-11-24 18:26:23.6575 Info Deduplicating reads for sample DSP-1001660008440-C02 
+ 
+2020-11-24 18:26:23.6692 Info DSP-1001660008440-C02 deduplicated in 11 ms 
+ 
+2020-11-24 18:26:23.6707 Info DSP-1001660008440-C02 processed in 779 ms 
+ 
+2020-11-24 18:26:23.6707 Info Processing sample: DSP-1001660008440-C03 
+ 
+2020-11-24 18:26:26.1888 Info Deduplicating reads for sample DSP-1001660008440-B12 
+ 
+2020-11-24 18:26:26.4497 Info FASTQ read progress for sample DSP-1001660008440-B08 is 95.74 %. 
+ 
+2020-11-24 18:26:27.1750 Info DSP-1001660008440-B12 deduplicated in 986 ms 
+ 
+2020-11-24 18:26:27.1750 Info DSP-1001660008440-B12 processed in 50432 ms 
+ 
+2020-11-24 18:26:27.1781 Info Processing sample: DSP-1001660008440-C07 
+ 
+2020-11-24 18:26:30.0307 Info Deduplicating reads for sample DSP-1001660008440-B08 
+ 
+2020-11-24 18:26:31.5013 Info FASTQ read progress for sample DSP-1001660008440-B09 is 97.76 %. 
+ 
+2020-11-24 18:26:31.5309 Info DSP-1001660008440-B08 deduplicated in 1499 ms 
+ 
+2020-11-24 18:26:31.5309 Info DSP-1001660008440-B08 processed in 82308 ms 
+ 
+2020-11-24 18:26:31.5338 Info Processing sample: DSP-1001660008440-C09 
+ 
+2020-11-24 18:26:33.1817 Info Deduplicating reads for sample DSP-1001660008440-B09 
+ 
+2020-11-24 18:26:34.5042 Info DSP-1001660008440-B09 deduplicated in 1322 ms 
+ 
+2020-11-24 18:26:34.5056 Info DSP-1001660008440-B09 processed in 69376 ms 
+ 
+2020-11-24 18:26:34.5056 Info Processing sample: DSP-1001660008440-B10 
+ 
+2020-11-24 18:26:35.5323 Info FASTQ read progress for sample DSP-1001660008440-C03 is 95.22 %. 
+ 
+2020-11-24 18:26:36.1064 Info Deduplicating reads for sample DSP-1001660008440-C03 
+ 
+2020-11-24 18:26:36.4505 Info Deduplicating reads for sample DSP-1001660008440-B10 
+ 
+2020-11-24 18:26:36.4954 Info DSP-1001660008440-C03 deduplicated in 388 ms 
+ 
+2020-11-24 18:26:36.4975 Info DSP-1001660008440-C03 processed in 12824 ms 
+ 
+2020-11-24 18:26:36.4975 Info Processing sample: DSP-1001660008440-C04 
+ 
+2020-11-24 18:26:36.6365 Info DSP-1001660008440-B10 deduplicated in 185 ms 
+ 
+2020-11-24 18:26:36.6380 Info DSP-1001660008440-B10 processed in 2131 ms 
+ 
+2020-11-24 18:26:36.6380 Info Processing sample: DSP-1001660008440-C11 
+ 
+2020-11-24 18:26:39.3497 Info FASTQ read progress for sample DSP-1001660008440-C07 is 16.59 %. 
+ 
+2020-11-24 18:26:43.7864 Info FASTQ read progress for sample DSP-1001660008440-C09 is 19.63 %. 
+ 
+2020-11-24 18:26:48.0825 Info FASTQ read progress for sample DSP-1001660008440-C04 is 23.68 %. 
+ 
+2020-11-24 18:26:48.2672 Info FASTQ read progress for sample DSP-1001660008440-C11 is 19.56 %. 
+ 
+2020-11-24 18:26:50.6106 Info FASTQ read progress for sample DSP-1001660008440-C07 is 33.05 %. 
+ 
+2020-11-24 18:26:54.6983 Info FASTQ read progress for sample DSP-1001660008440-C09 is 39.11 %. 
+ 
+2020-11-24 18:26:58.9141 Info FASTQ read progress for sample DSP-1001660008440-C04 is 47.05 %. 
+ 
+2020-11-24 18:26:58.9866 Info FASTQ read progress for sample DSP-1001660008440-C11 is 38.98 %. 
+ 
+2020-11-24 18:27:01.3417 Info FASTQ read progress for sample DSP-1001660008440-C07 is 49.25 %. 
+ 
+2020-11-24 18:27:05.5377 Info FASTQ read progress for sample DSP-1001660008440-C09 is 58.71 %. 
+ 
+2020-11-24 18:27:09.6857 Info FASTQ read progress for sample DSP-1001660008440-C11 is 58.57 %. 
+ 
+2020-11-24 18:27:09.7168 Info FASTQ read progress for sample DSP-1001660008440-C04 is 71.13 %. 
+ 
+2020-11-24 18:27:12.0843 Info FASTQ read progress for sample DSP-1001660008440-C07 is 66.23 %. 
+ 
+2020-11-24 18:27:16.2592 Info FASTQ read progress for sample DSP-1001660008440-C09 is 78.73 %. 
+ 
+2020-11-24 18:27:20.3630 Info FASTQ read progress for sample DSP-1001660008440-C11 is 78.62 %. 
+ 
+2020-11-24 18:27:22.7475 Info Deduplicating reads for sample DSP-1001660008440-C04 
+ 
+2020-11-24 18:27:22.7968 Info FASTQ read progress for sample DSP-1001660008440-C07 is 83.16 %. 
+ 
+2020-11-24 18:27:23.8099 Info DSP-1001660008440-C04 deduplicated in 1061 ms 
+ 
+2020-11-24 18:27:23.8099 Info DSP-1001660008440-C04 processed in 47311 ms 
+ 
+2020-11-24 18:27:23.8099 Info Processing sample: DSP-1001660008440-C05 
+ 
+2020-11-24 18:27:27.5120 Info FASTQ read progress for sample DSP-1001660008440-C09 is 98.50 %. 
+ 
+2020-11-24 18:27:28.4287 Info Deduplicating reads for sample DSP-1001660008440-C09 
+ 
+2020-11-24 18:27:29.3319 Info DSP-1001660008440-C09 deduplicated in 902 ms 
+ 
+2020-11-24 18:27:29.3345 Info DSP-1001660008440-C09 processed in 57799 ms 
+ 
+2020-11-24 18:27:29.3345 Info Processing sample: DSP-1001660008440-C10 
+ 
+2020-11-24 18:27:31.8744 Info FASTQ read progress for sample DSP-1001660008440-C11 is 98.42 %. 
+ 
+2020-11-24 18:27:32.7850 Info Deduplicating reads for sample DSP-1001660008440-C11 
+ 
+2020-11-24 18:27:33.6719 Info DSP-1001660008440-C11 deduplicated in 885 ms 
+ 
+2020-11-24 18:27:33.6719 Info DSP-1001660008440-C11 processed in 57033 ms 
+ 
+2020-11-24 18:27:33.6746 Info Processing sample: DSP-1001660008440-C12 
+ 
+2020-11-24 18:27:34.5332 Info FASTQ read progress for sample DSP-1001660008440-C07 is 99.83 %. 
+ 
+2020-11-24 18:27:34.6519 Info Deduplicating reads for sample DSP-1001660008440-C07 
+ 
+2020-11-24 18:27:35.5131 Info FASTQ read progress for sample DSP-1001660008440-C05 is 13.65 %. 
+ 
+2020-11-24 18:27:35.9188 Info DSP-1001660008440-C07 deduplicated in 1266 ms 
+ 
+2020-11-24 18:27:35.9188 Info DSP-1001660008440-C07 processed in 68741 ms 
+ 
+2020-11-24 18:27:35.9216 Info Processing sample: DSP-1001660008440-C08 
+ 
+2020-11-24 18:27:41.1093 Info FASTQ read progress for sample DSP-1001660008440-C10 is 17.68 %. 
+ 
+2020-11-24 18:27:45.1970 Info FASTQ read progress for sample DSP-1001660008440-C12 is 23.82 %. 
+ 
+2020-11-24 18:27:46.9564 Info FASTQ read progress for sample DSP-1001660008440-C05 is 27.24 %. 
+ 
+2020-11-24 18:27:47.3583 Info FASTQ read progress for sample DSP-1001660008440-C08 is 18.90 %. 
+ 
+2020-11-24 18:27:51.9956 Info FASTQ read progress for sample DSP-1001660008440-C10 is 35.21 %. 
+ 
+2020-11-24 18:27:55.8557 Info FASTQ read progress for sample DSP-1001660008440-C12 is 47.31 %. 
+ 
+2020-11-24 18:27:57.7638 Info FASTQ read progress for sample DSP-1001660008440-C05 is 40.64 %. 
+ 
+2020-11-24 18:27:58.1229 Info FASTQ read progress for sample DSP-1001660008440-C08 is 37.67 %. 
+ 
+2020-11-24 18:28:02.7622 Info FASTQ read progress for sample DSP-1001660008440-C10 is 52.61 %. 
+ 
+2020-11-24 18:28:06.5635 Info FASTQ read progress for sample DSP-1001660008440-C12 is 71.60 %. 
+ 
+2020-11-24 18:28:08.4973 Info FASTQ read progress for sample DSP-1001660008440-C05 is 54.22 %. 
+ 
+2020-11-24 18:28:08.8243 Info FASTQ read progress for sample DSP-1001660008440-C08 is 56.45 %. 
+ 
+2020-11-24 18:28:13.5779 Info FASTQ read progress for sample DSP-1001660008440-C10 is 70.72 %. 
+ 
+2020-11-24 18:28:19.2229 Info Deduplicating reads for sample DSP-1001660008440-C12 
+ 
+2020-11-24 18:28:19.3274 Info FASTQ read progress for sample DSP-1001660008440-C05 is 68.14 %. 
+ 
+2020-11-24 18:28:19.5478 Info FASTQ read progress for sample DSP-1001660008440-C08 is 75.74 %. 
+ 
+2020-11-24 18:28:20.0273 Info DSP-1001660008440-C12 deduplicated in 804 ms 
+ 
+2020-11-24 18:28:20.0273 Info DSP-1001660008440-C12 processed in 46354 ms 
+ 
+2020-11-24 18:28:20.0299 Info Processing sample: DSP-1001660008440-D01 
+ 
+2020-11-24 18:28:24.6347 Info FASTQ read progress for sample DSP-1001660008440-C10 is 88.72 %. 
+ 
+2020-11-24 18:28:30.6573 Info FASTQ read progress for sample DSP-1001660008440-C08 is 94.85 %. 
+ 
+2020-11-24 18:28:30.9949 Info FASTQ read progress for sample DSP-1001660008440-D01 is 17.42 %. 
+ 
+2020-11-24 18:28:31.5145 Info Deduplicating reads for sample DSP-1001660008440-C10 
+ 
+2020-11-24 18:28:32.5787 Info DSP-1001660008440-C10 deduplicated in 1063 ms 
+ 
+2020-11-24 18:28:32.5787 Info DSP-1001660008440-C10 processed in 63244 ms 
+ 
+2020-11-24 18:28:32.5816 Info Processing sample: DSP-1001660008440-D05 
+ 
+2020-11-24 18:28:33.6565 Info Deduplicating reads for sample DSP-1001660008440-C08 
+ 
+2020-11-24 18:28:34.4637 Info DSP-1001660008440-C08 deduplicated in 806 ms 
+ 
+2020-11-24 18:28:34.4637 Info DSP-1001660008440-C08 processed in 58543 ms 
+ 
+2020-11-24 18:28:34.4668 Info Processing sample: DSP-1001660008440-D07 
+ 
+2020-11-24 18:28:34.7858 Info Deduplicating reads for sample DSP-1001660008440-D05 
+ 
+2020-11-24 18:28:34.8147 Info DSP-1001660008440-D05 deduplicated in 28 ms 
+ 
+2020-11-24 18:28:34.8147 Info DSP-1001660008440-D05 processed in 2234 ms 
+ 
+2020-11-24 18:28:34.8147 Info Processing sample: DSP-1001660008440-D06 
+ 
+2020-11-24 18:28:42.1296 Info FASTQ read progress for sample DSP-1001660008440-C05 is 95.81 %. 
+ 
+2020-11-24 18:28:42.6895 Info FASTQ read progress for sample DSP-1001660008440-D01 is 34.71 %. 
+ 
+2020-11-24 18:28:45.6072 Info Deduplicating reads for sample DSP-1001660008440-C05 
+ 
+2020-11-24 18:28:46.5001 Info FASTQ read progress for sample DSP-1001660008440-D06 is 6.02 %. 
+ 
+2020-11-24 18:28:47.1607 Info DSP-1001660008440-C05 deduplicated in 1552 ms 
+ 
+2020-11-24 18:28:47.1621 Info DSP-1001660008440-C05 processed in 83349 ms 
+ 
+2020-11-24 18:28:47.1621 Info Processing sample: DSP-1001660008440-C06 
+ 
+2020-11-24 18:28:54.2163 Info FASTQ read progress for sample DSP-1001660008440-D01 is 51.81 %. 
+ 
+2020-11-24 18:28:54.7064 Info Deduplicating reads for sample DSP-1001660008440-D07 
+ 
+2020-11-24 18:28:55.0273 Info DSP-1001660008440-D07 deduplicated in 320 ms 
+ 
+2020-11-24 18:28:55.0273 Info DSP-1001660008440-D07 processed in 20562 ms 
+ 
+2020-11-24 18:28:55.0300 Info Processing sample: DSP-1001660008440-D08 
+ 
+2020-11-24 18:28:56.2818 Info Deduplicating reads for sample DSP-1001660008440-D08 
+ 
+2020-11-24 18:28:56.3023 Info DSP-1001660008440-D08 deduplicated in 20 ms 
+ 
+2020-11-24 18:28:56.3023 Info DSP-1001660008440-D08 processed in 1273 ms 
+ 
+2020-11-24 18:28:56.3023 Info Processing sample: DSP-1001660008440-D09 
+ 
+2020-11-24 18:28:58.2598 Info FASTQ read progress for sample DSP-1001660008440-D06 is 12.09 %. 
+ 
+2020-11-24 18:28:58.8782 Info FASTQ read progress for sample DSP-1001660008440-C06 is 19.46 %. 
+ 
+2020-11-24 18:29:05.8620 Info FASTQ read progress for sample DSP-1001660008440-D01 is 69.68 %. 
+ 
+2020-11-24 18:29:08.0133 Info FASTQ read progress for sample DSP-1001660008440-D09 is 9.86 %. 
+ 
+2020-11-24 18:29:09.7800 Info FASTQ read progress for sample DSP-1001660008440-D06 is 18.14 %. 
+ 
+2020-11-24 18:29:10.3132 Info FASTQ read progress for sample DSP-1001660008440-C06 is 38.76 %. 
+ 
+2020-11-24 18:29:16.9732 Info FASTQ read progress for sample DSP-1001660008440-D01 is 87.48 %. 
+ 
+2020-11-24 18:29:19.0517 Info FASTQ read progress for sample DSP-1001660008440-D09 is 19.67 %. 
+ 
+2020-11-24 18:29:20.8542 Info FASTQ read progress for sample DSP-1001660008440-D06 is 24.14 %. 
+ 
+2020-11-24 18:29:21.4630 Info FASTQ read progress for sample DSP-1001660008440-C06 is 58.24 %. 
+ 
+2020-11-24 18:29:24.7901 Info Deduplicating reads for sample DSP-1001660008440-D01 
+ 
+2020-11-24 18:29:25.6573 Info DSP-1001660008440-D01 deduplicated in 866 ms 
+ 
+2020-11-24 18:29:25.6586 Info DSP-1001660008440-D01 processed in 65629 ms 
+ 
+2020-11-24 18:29:25.6586 Info Processing sample: DSP-1001660008440-D02 
+ 
+2020-11-24 18:29:30.4935 Info FASTQ read progress for sample DSP-1001660008440-D09 is 29.49 %. 
+ 
+2020-11-24 18:29:32.4391 Info FASTQ read progress for sample DSP-1001660008440-D06 is 30.14 %. 
+ 
+2020-11-24 18:29:33.0344 Info FASTQ read progress for sample DSP-1001660008440-C06 is 78.16 %. 
+ 
+2020-11-24 18:29:37.2855 Info FASTQ read progress for sample DSP-1001660008440-D02 is 5.52 %. 
+ 
+2020-11-24 18:29:41.9685 Info FASTQ read progress for sample DSP-1001660008440-D09 is 39.19 %. 
+ 
+2020-11-24 18:29:43.7403 Info FASTQ read progress for sample DSP-1001660008440-D06 is 36.13 %. 
+ 
+2020-11-24 18:29:44.2471 Info FASTQ read progress for sample DSP-1001660008440-C06 is 97.82 %. 
+ 
+2020-11-24 18:29:45.5011 Info Deduplicating reads for sample DSP-1001660008440-C06 
+ 
+2020-11-24 18:29:46.5970 Info DSP-1001660008440-C06 deduplicated in 1095 ms 
+ 
+2020-11-24 18:29:46.5984 Info DSP-1001660008440-C06 processed in 59434 ms 
+ 
+2020-11-24 18:29:46.5984 Info Processing sample: DSP-1001660008440-D11 
+ 
+2020-11-24 18:29:48.6823 Info FASTQ read progress for sample DSP-1001660008440-D02 is 11.07 %. 
+ 
+2020-11-24 18:29:53.3459 Info FASTQ read progress for sample DSP-1001660008440-D09 is 48.79 %. 
+ 
+2020-11-24 18:29:55.3914 Info FASTQ read progress for sample DSP-1001660008440-D06 is 42.01 %. 
+ 
+2020-11-24 18:29:58.0428 Info FASTQ read progress for sample DSP-1001660008440-D11 is 7.97 %. 
+ 
+2020-11-24 18:30:00.1137 Info FASTQ read progress for sample DSP-1001660008440-D02 is 16.62 %. 
+ 
+2020-11-24 18:30:04.5448 Info FASTQ read progress for sample DSP-1001660008440-D09 is 58.86 %. 
+ 
+2020-11-24 18:30:06.4522 Info FASTQ read progress for sample DSP-1001660008440-D06 is 47.92 %. 
+ 
+2020-11-24 18:30:08.9262 Info FASTQ read progress for sample DSP-1001660008440-D11 is 15.95 %. 
+ 
+2020-11-24 18:30:10.9868 Info FASTQ read progress for sample DSP-1001660008440-D02 is 22.11 %. 
+ 
+2020-11-24 18:30:17.3184 Info FASTQ read progress for sample DSP-1001660008440-D06 is 54.05 %. 
+ 
+2020-11-24 18:30:19.6960 Info FASTQ read progress for sample DSP-1001660008440-D11 is 23.86 %. 
+ 
+2020-11-24 18:30:21.7837 Info FASTQ read progress for sample DSP-1001660008440-D02 is 27.63 %. 
+ 
+2020-11-24 18:30:26.3127 Info FASTQ read progress for sample DSP-1001660008440-D09 is 79.00 %. 
+ 
+2020-11-24 18:30:28.2069 Info FASTQ read progress for sample DSP-1001660008440-D06 is 60.25 %. 
+ 
+2020-11-24 18:30:30.4719 Info FASTQ read progress for sample DSP-1001660008440-D11 is 31.79 %. 
+ 
+2020-11-24 18:30:32.6070 Info FASTQ read progress for sample DSP-1001660008440-D02 is 33.13 %. 
+ 
+2020-11-24 18:30:41.1861 Info FASTQ read progress for sample DSP-1001660008440-D11 is 39.61 %. 
+ 
+2020-11-24 18:30:43.3750 Info FASTQ read progress for sample DSP-1001660008440-D02 is 38.56 %. 
+ 
+2020-11-24 18:30:47.9812 Info FASTQ read progress for sample DSP-1001660008440-D09 is 98.86 %. 
+ 
+2020-11-24 18:30:49.2150 Info Deduplicating reads for sample DSP-1001660008440-D09 
+ 
+2020-11-24 18:30:49.9947 Info FASTQ read progress for sample DSP-1001660008440-D06 is 72.63 %. 
+ 
+2020-11-24 18:30:51.5115 Info DSP-1001660008440-D09 deduplicated in 2296 ms 
+ 
+2020-11-24 18:30:51.5115 Info DSP-1001660008440-D09 processed in 115207 ms 
+ 
+2020-11-24 18:30:51.5143 Info Processing sample: DSP-1001660008440-D10 
+ 
+2020-11-24 18:30:52.4347 Info FASTQ read progress for sample DSP-1001660008440-D11 is 47.38 %. 
+ 
+2020-11-24 18:30:55.0682 Info FASTQ read progress for sample DSP-1001660008440-D02 is 43.97 %. 
+ 
+2020-11-24 18:31:01.9261 Info FASTQ read progress for sample DSP-1001660008440-D06 is 78.80 %. 
+ 
+2020-11-24 18:31:03.1261 Info FASTQ read progress for sample DSP-1001660008440-D10 is 8.05 %. 
+ 
+2020-11-24 18:31:04.0500 Info FASTQ read progress for sample DSP-1001660008440-D11 is 55.44 %. 
+ 
+2020-11-24 18:31:13.0304 Info FASTQ read progress for sample DSP-1001660008440-D06 is 84.99 %. 
+ 
+2020-11-24 18:31:14.0531 Info FASTQ read progress for sample DSP-1001660008440-D10 is 16.10 %. 
+ 
+2020-11-24 18:31:15.0555 Info FASTQ read progress for sample DSP-1001660008440-D11 is 63.61 %. 
+ 
+2020-11-24 18:31:17.2805 Info FASTQ read progress for sample DSP-1001660008440-D02 is 55.01 %. 
+ 
+2020-11-24 18:31:23.9611 Info FASTQ read progress for sample DSP-1001660008440-D06 is 91.04 %. 
+ 
+2020-11-24 18:31:24.9310 Info FASTQ read progress for sample DSP-1001660008440-D10 is 24.09 %. 
+ 
+2020-11-24 18:31:25.8992 Info FASTQ read progress for sample DSP-1001660008440-D11 is 71.77 %. 
+ 
+2020-11-24 18:31:28.1278 Info FASTQ read progress for sample DSP-1001660008440-D02 is 60.69 %. 
+ 
+2020-11-24 18:31:34.8271 Info FASTQ read progress for sample DSP-1001660008440-D06 is 97.14 %. 
+ 
+2020-11-24 18:31:35.7319 Info FASTQ read progress for sample DSP-1001660008440-D10 is 32.08 %. 
+ 
+2020-11-24 18:31:36.7647 Info FASTQ read progress for sample DSP-1001660008440-D11 is 79.92 %. 
+ 
+2020-11-24 18:31:38.9494 Info FASTQ read progress for sample DSP-1001660008440-D02 is 66.36 %. 
+ 
+2020-11-24 18:31:39.9817 Info Deduplicating reads for sample DSP-1001660008440-D06 
+ 
+2020-11-24 18:31:43.6036 Info DSP-1001660008440-D06 deduplicated in 3621 ms 
+ 
+2020-11-24 18:31:43.6036 Info DSP-1001660008440-D06 processed in 188787 ms 
+ 
+2020-11-24 18:31:43.6064 Info Processing sample: DSP-1001660008440-E03 
+ 
+2020-11-24 18:31:47.6700 Info FASTQ read progress for sample DSP-1001660008440-D10 is 39.94 %. 
+ 
+2020-11-24 18:31:48.8097 Info FASTQ read progress for sample DSP-1001660008440-D11 is 88.03 %. 
+ 
+2020-11-24 18:31:50.9237 Info FASTQ read progress for sample DSP-1001660008440-D02 is 71.99 %. 
+ 
+2020-11-24 18:31:54.8691 Info FASTQ read progress for sample DSP-1001660008440-E03 is 15.34 %. 
+ 
+2020-11-24 18:31:58.6191 Info FASTQ read progress for sample DSP-1001660008440-D10 is 47.82 %. 
+ 
+2020-11-24 18:32:01.8494 Info FASTQ read progress for sample DSP-1001660008440-D02 is 77.65 %. 
+ 
+2020-11-24 18:32:05.0926 Info Deduplicating reads for sample DSP-1001660008440-D11 
+ 
+2020-11-24 18:32:05.8463 Info FASTQ read progress for sample DSP-1001660008440-E03 is 30.58 %. 
+ 
+2020-11-24 18:32:08.0929 Info DSP-1001660008440-D11 deduplicated in 2999 ms 
+ 
+2020-11-24 18:32:08.0943 Info DSP-1001660008440-D11 processed in 141493 ms 
+ 
+2020-11-24 18:32:08.0943 Info Processing sample: DSP-1001660008440-D12 
+ 
+2020-11-24 18:32:10.4704 Info FASTQ read progress for sample DSP-1001660008440-D10 is 55.98 %. 
+ 
+2020-11-24 18:32:14.0081 Info FASTQ read progress for sample DSP-1001660008440-D02 is 83.31 %. 
+ 
+2020-11-24 18:32:17.9950 Info FASTQ read progress for sample DSP-1001660008440-E03 is 45.62 %. 
+ 
+2020-11-24 18:32:19.7280 Info FASTQ read progress for sample DSP-1001660008440-D12 is 11.48 %. 
+ 
+2020-11-24 18:32:21.9418 Info FASTQ read progress for sample DSP-1001660008440-D10 is 64.18 %. 
+ 
+2020-11-24 18:32:25.2656 Info FASTQ read progress for sample DSP-1001660008440-D02 is 88.89 %. 
+ 
+2020-11-24 18:32:29.0911 Info FASTQ read progress for sample DSP-1001660008440-E03 is 61.09 %. 
+ 
+2020-11-24 18:32:30.9504 Info FASTQ read progress for sample DSP-1001660008440-D12 is 22.90 %. 
+ 
+2020-11-24 18:32:32.8845 Info FASTQ read progress for sample DSP-1001660008440-D10 is 72.38 %. 
+ 
+2020-11-24 18:32:36.2045 Info FASTQ read progress for sample DSP-1001660008440-D02 is 94.45 %. 
+ 
+2020-11-24 18:32:39.9590 Info FASTQ read progress for sample DSP-1001660008440-E03 is 76.72 %. 
+ 
+2020-11-24 18:32:41.9110 Info FASTQ read progress for sample DSP-1001660008440-D12 is 34.31 %. 
+ 
+2020-11-24 18:32:43.7303 Info FASTQ read progress for sample DSP-1001660008440-D10 is 80.56 %. 
+ 
+2020-11-24 18:32:47.0310 Info FASTQ read progress for sample DSP-1001660008440-D02 is 99.99 %. 
+ 
+2020-11-24 18:32:47.0581 Info Deduplicating reads for sample DSP-1001660008440-D02 
+ 
+2020-11-24 18:32:51.5845 Info DSP-1001660008440-D02 deduplicated in 4525 ms 
+ 
+2020-11-24 18:32:51.5859 Info DSP-1001660008440-D02 processed in 205926 ms 
+ 
+2020-11-24 18:32:51.5859 Info Processing sample: DSP-1001660008440-D03 
+ 
+2020-11-24 18:32:51.7759 Info FASTQ read progress for sample DSP-1001660008440-E03 is 92.20 %. 
+ 
+2020-11-24 18:32:54.0982 Info FASTQ read progress for sample DSP-1001660008440-D12 is 45.56 %. 
+ 
+2020-11-24 18:32:55.9790 Info FASTQ read progress for sample DSP-1001660008440-D10 is 88.68 %. 
+ 
+2020-11-24 18:32:57.8027 Info Deduplicating reads for sample DSP-1001660008440-E03 
+ 
+2020-11-24 18:32:59.1631 Info DSP-1001660008440-E03 deduplicated in 1360 ms 
+ 
+2020-11-24 18:32:59.1631 Info DSP-1001660008440-E03 processed in 75558 ms 
+ 
+2020-11-24 18:32:59.1658 Info Processing sample: DSP-1001660008440-E04 
+ 
+2020-11-24 18:33:05.9553 Info FASTQ read progress for sample DSP-1001660008440-D12 is 57.10 %. 
+ 
+2020-11-24 18:33:07.8326 Info FASTQ read progress for sample DSP-1001660008440-D10 is 96.73 %. 
+ 
+2020-11-24 18:33:10.9445 Info FASTQ read progress for sample DSP-1001660008440-E04 is 7.51 %. 
+ 
+2020-11-24 18:33:12.3909 Info Deduplicating reads for sample DSP-1001660008440-D10 
+ 
+2020-11-24 18:33:15.3035 Info FASTQ read progress for sample DSP-1001660008440-D03 is 16.44 %. 
+ 
+2020-11-24 18:33:15.7603 Info DSP-1001660008440-D10 deduplicated in 3369 ms 
+ 
+2020-11-24 18:33:15.7619 Info DSP-1001660008440-D10 processed in 144247 ms 
+ 
+2020-11-24 18:33:15.7619 Info Processing sample: DSP-1001660008440-E05 
+ 
+2020-11-24 18:33:18.0287 Info FASTQ read progress for sample DSP-1001660008440-D12 is 68.77 %. 
+ 
+2020-11-24 18:33:23.3235 Info FASTQ read progress for sample DSP-1001660008440-E04 is 15.04 %. 
+ 
+2020-11-24 18:33:27.1521 Info FASTQ read progress for sample DSP-1001660008440-D03 is 24.60 %. 
+ 
+2020-11-24 18:33:27.4666 Info FASTQ read progress for sample DSP-1001660008440-E05 is 7.69 %. 
+ 
+2020-11-24 18:33:29.5830 Info FASTQ read progress for sample DSP-1001660008440-D12 is 80.44 %. 
+ 
+2020-11-24 18:33:34.7224 Info FASTQ read progress for sample DSP-1001660008440-E04 is 22.51 %. 
+ 
+2020-11-24 18:33:38.2440 Info FASTQ read progress for sample DSP-1001660008440-D03 is 32.77 %. 
+ 
+2020-11-24 18:33:38.7111 Info FASTQ read progress for sample DSP-1001660008440-E05 is 15.40 %. 
+ 
+2020-11-24 18:33:40.6356 Info FASTQ read progress for sample DSP-1001660008440-D12 is 91.99 %. 
+ 
+2020-11-24 18:33:45.7645 Info FASTQ read progress for sample DSP-1001660008440-E04 is 29.98 %. 
+ 
+2020-11-24 18:33:48.2353 Info Deduplicating reads for sample DSP-1001660008440-D12 
+ 
+2020-11-24 18:33:49.2231 Info FASTQ read progress for sample DSP-1001660008440-D03 is 40.80 %. 
+ 
+2020-11-24 18:33:49.9580 Info FASTQ read progress for sample DSP-1001660008440-E05 is 23.03 %. 
+ 
+2020-11-24 18:33:50.7236 Info DSP-1001660008440-D12 deduplicated in 2487 ms 
+ 
+2020-11-24 18:33:50.7236 Info DSP-1001660008440-D12 processed in 102629 ms 
+ 
+2020-11-24 18:33:50.7263 Info Processing sample: DSP-1001660008440-E01 
+ 
+2020-11-24 18:33:57.7912 Info FASTQ read progress for sample DSP-1001660008440-E04 is 37.42 %. 
+ 
+2020-11-24 18:34:01.1362 Info FASTQ read progress for sample DSP-1001660008440-D03 is 48.84 %. 
+ 
+2020-11-24 18:34:02.0247 Info FASTQ read progress for sample DSP-1001660008440-E05 is 30.70 %. 
+ 
+2020-11-24 18:34:02.4378 Info FASTQ read progress for sample DSP-1001660008440-E01 is 8.18 %. 
+ 
+2020-11-24 18:34:08.9396 Info FASTQ read progress for sample DSP-1001660008440-E04 is 44.78 %. 
+ 
+2020-11-24 18:34:12.1263 Info FASTQ read progress for sample DSP-1001660008440-D03 is 57.23 %. 
+ 
+2020-11-24 18:34:13.0018 Info FASTQ read progress for sample DSP-1001660008440-E05 is 38.28 %. 
+ 
+2020-11-24 18:34:13.4275 Info FASTQ read progress for sample DSP-1001660008440-E01 is 16.37 %. 
+ 
+2020-11-24 18:34:19.8452 Info FASTQ read progress for sample DSP-1001660008440-E04 is 52.20 %. 
+ 
+2020-11-24 18:34:22.9264 Info FASTQ read progress for sample DSP-1001660008440-D03 is 65.64 %. 
+ 
+2020-11-24 18:34:23.9101 Info FASTQ read progress for sample DSP-1001660008440-E05 is 45.80 %. 
+ 
+2020-11-24 18:34:24.2949 Info FASTQ read progress for sample DSP-1001660008440-E01 is 24.49 %. 
+ 
+2020-11-24 18:34:30.7107 Info FASTQ read progress for sample DSP-1001660008440-E04 is 59.92 %. 
+ 
+2020-11-24 18:34:33.6830 Info FASTQ read progress for sample DSP-1001660008440-D03 is 74.04 %. 
+ 
+2020-11-24 18:34:34.7734 Info FASTQ read progress for sample DSP-1001660008440-E05 is 53.51 %. 
+ 
+2020-11-24 18:34:35.0706 Info FASTQ read progress for sample DSP-1001660008440-E01 is 32.62 %. 
+ 
+2020-11-24 18:34:41.5411 Info FASTQ read progress for sample DSP-1001660008440-E04 is 67.60 %. 
+ 
+2020-11-24 18:34:44.5672 Info FASTQ read progress for sample DSP-1001660008440-D03 is 82.44 %. 
+ 
+2020-11-24 18:34:45.5683 Info FASTQ read progress for sample DSP-1001660008440-E05 is 61.39 %. 
+ 
+2020-11-24 18:34:45.7918 Info FASTQ read progress for sample DSP-1001660008440-E01 is 40.61 %. 
+ 
+2020-11-24 18:34:52.3907 Info FASTQ read progress for sample DSP-1001660008440-E04 is 75.30 %. 
+ 
+2020-11-24 18:34:55.3422 Info FASTQ read progress for sample DSP-1001660008440-D03 is 90.72 %. 
+ 
+2020-11-24 18:34:56.3716 Info FASTQ read progress for sample DSP-1001660008440-E05 is 69.25 %. 
+ 
+2020-11-24 18:34:56.6480 Info FASTQ read progress for sample DSP-1001660008440-E01 is 48.63 %. 
+ 
+2020-11-24 18:35:03.2370 Info FASTQ read progress for sample DSP-1001660008440-E04 is 82.98 %. 
+ 
+2020-11-24 18:35:06.1145 Info FASTQ read progress for sample DSP-1001660008440-D03 is 98.99 %. 
+ 
+2020-11-24 18:35:07.2678 Info FASTQ read progress for sample DSP-1001660008440-E05 is 77.10 %. 
+ 
+2020-11-24 18:35:07.4114 Info Deduplicating reads for sample DSP-1001660008440-D03 
+ 
+2020-11-24 18:35:07.5294 Info FASTQ read progress for sample DSP-1001660008440-E01 is 57.03 %. 
+ 
+2020-11-24 18:35:10.0326 Info DSP-1001660008440-D03 deduplicated in 2620 ms 
+ 
+2020-11-24 18:35:10.0341 Info DSP-1001660008440-D03 processed in 138446 ms 
+ 
+2020-11-24 18:35:10.0341 Info Processing sample: DSP-1001660008440-D04 
+ 
+2020-11-24 18:35:14.7908 Info FASTQ read progress for sample DSP-1001660008440-E04 is 90.55 %. 
+ 
+2020-11-24 18:35:18.8776 Info FASTQ read progress for sample DSP-1001660008440-E05 is 84.96 %. 
+ 
+2020-11-24 18:35:19.0420 Info FASTQ read progress for sample DSP-1001660008440-E01 is 65.47 %. 
+ 
+2020-11-24 18:35:20.8631 Info FASTQ read progress for sample DSP-1001660008440-D04 is 56.03 %. 
+ 
+2020-11-24 18:35:28.3471 Info Deduplicating reads for sample DSP-1001660008440-E04 
+ 
+2020-11-24 18:35:29.1796 Info Deduplicating reads for sample DSP-1001660008440-D04 
+ 
+2020-11-24 18:35:29.6320 Info DSP-1001660008440-D04 deduplicated in 452 ms 
+ 
+2020-11-24 18:35:29.6335 Info DSP-1001660008440-D04 processed in 19598 ms 
+ 
+2020-11-24 18:35:29.6335 Info Processing sample: DSP-1001660008440-E09 
+ 
+2020-11-24 18:35:30.2216 Info FASTQ read progress for sample DSP-1001660008440-E05 is 92.69 %. 
+ 
+2020-11-24 18:35:30.3461 Info FASTQ read progress for sample DSP-1001660008440-E01 is 73.91 %. 
+ 
+2020-11-24 18:35:31.5186 Info DSP-1001660008440-E04 deduplicated in 3170 ms 
+ 
+2020-11-24 18:35:31.5186 Info DSP-1001660008440-E04 processed in 152354 ms 
+ 
+2020-11-24 18:35:31.5235 Info Processing sample: DSP-1001660008440-F01 
+ 
+2020-11-24 18:35:41.7602 Info FASTQ read progress for sample DSP-1001660008440-E09 is 5.15 %. 
+ 
+2020-11-24 18:35:41.7747 Info Deduplicating reads for sample DSP-1001660008440-E05 
+ 
+2020-11-24 18:35:42.6463 Info FASTQ read progress for sample DSP-1001660008440-E01 is 82.31 %. 
+ 
+2020-11-24 18:35:43.5191 Info FASTQ read progress for sample DSP-1001660008440-F01 is 40.60 %. 
+ 
+2020-11-24 18:35:45.4210 Info DSP-1001660008440-E05 deduplicated in 3646 ms 
+ 
+2020-11-24 18:35:45.4226 Info DSP-1001660008440-E05 processed in 149659 ms 
+ 
+2020-11-24 18:35:45.4226 Info Processing sample: DSP-1001660008440-E06 
+ 
+2020-11-24 18:35:54.3565 Info FASTQ read progress for sample DSP-1001660008440-E09 is 10.33 %. 
+ 
+2020-11-24 18:35:55.3059 Info FASTQ read progress for sample DSP-1001660008440-E01 is 90.59 %. 
+ 
+2020-11-24 18:35:55.6913 Info FASTQ read progress for sample DSP-1001660008440-F01 is 81.79 %. 
+ 
+2020-11-24 18:35:57.3347 Info FASTQ read progress for sample DSP-1001660008440-E06 is 10.79 %. 
+ 
+2020-11-24 18:36:00.5761 Info Deduplicating reads for sample DSP-1001660008440-F01 
+ 
+2020-11-24 18:36:00.9454 Info DSP-1001660008440-F01 deduplicated in 368 ms 
+ 
+2020-11-24 18:36:00.9454 Info DSP-1001660008440-F01 processed in 29423 ms 
+ 
+2020-11-24 18:36:00.9454 Info Processing sample: DSP-1001660008440-F02 
+ 
+2020-11-24 18:36:04.0124 Info Deduplicating reads for sample DSP-1001660008440-F02 
+ 
+2020-11-24 18:36:04.0515 Info DSP-1001660008440-F02 deduplicated in 38 ms 
+ 
+2020-11-24 18:36:04.0515 Info DSP-1001660008440-F02 processed in 3104 ms 
+ 
+2020-11-24 18:36:04.0542 Info Processing sample: DSP-1001660008440-F03 
+ 
+2020-11-24 18:36:05.8708 Info FASTQ read progress for sample DSP-1001660008440-E09 is 15.51 %. 
+ 
+2020-11-24 18:36:06.6447 Info FASTQ read progress for sample DSP-1001660008440-E01 is 98.82 %. 
+ 
+2020-11-24 18:36:08.3078 Info Deduplicating reads for sample DSP-1001660008440-E01 
+ 
+2020-11-24 18:36:08.7425 Info FASTQ read progress for sample DSP-1001660008440-E06 is 21.55 %. 
+ 
+2020-11-24 18:36:11.0225 Info DSP-1001660008440-E01 deduplicated in 2714 ms 
+ 
+2020-11-24 18:36:11.0225 Info DSP-1001660008440-E01 processed in 140297 ms 
+ 
+2020-11-24 18:36:11.0225 Info Processing sample: DSP-1001660008440-E02 
+ 
+2020-11-24 18:36:16.2606 Info FASTQ read progress for sample DSP-1001660008440-F03 is 12.99 %. 
+ 
+2020-11-24 18:36:18.3923 Info FASTQ read progress for sample DSP-1001660008440-E09 is 20.64 %. 
+ 
+2020-11-24 18:36:20.9452 Info FASTQ read progress for sample DSP-1001660008440-E06 is 32.30 %. 
+ 
+2020-11-24 18:36:27.4841 Info FASTQ read progress for sample DSP-1001660008440-F03 is 25.94 %. 
+ 
+2020-11-24 18:36:29.7427 Info FASTQ read progress for sample DSP-1001660008440-E09 is 25.81 %. 
+ 
+2020-11-24 18:36:32.1854 Info FASTQ read progress for sample DSP-1001660008440-E06 is 42.88 %. 
+ 
+2020-11-24 18:36:34.1671 Info FASTQ read progress for sample DSP-1001660008440-E02 is 14.20 %. 
+ 
+2020-11-24 18:36:38.6017 Info FASTQ read progress for sample DSP-1001660008440-F03 is 38.73 %. 
+ 
+2020-11-24 18:36:41.0095 Info FASTQ read progress for sample DSP-1001660008440-E09 is 30.92 %. 
+ 
+2020-11-24 18:36:43.2429 Info FASTQ read progress for sample DSP-1001660008440-E06 is 53.59 %. 
+ 
+2020-11-24 18:36:45.2571 Info FASTQ read progress for sample DSP-1001660008440-E02 is 21.26 %. 
+ 
+2020-11-24 18:36:49.5865 Info FASTQ read progress for sample DSP-1001660008440-F03 is 51.50 %. 
+ 
+2020-11-24 18:36:52.1003 Info FASTQ read progress for sample DSP-1001660008440-E09 is 36.03 %. 
+ 
+2020-11-24 18:36:54.2078 Info FASTQ read progress for sample DSP-1001660008440-E06 is 64.62 %. 
+ 
+2020-11-24 18:36:56.3098 Info FASTQ read progress for sample DSP-1001660008440-E02 is 28.30 %. 
+ 
+2020-11-24 18:37:00.4352 Info FASTQ read progress for sample DSP-1001660008440-F03 is 64.78 %. 
+ 
+2020-11-24 18:37:03.1312 Info FASTQ read progress for sample DSP-1001660008440-E09 is 41.05 %. 
+ 
+2020-11-24 18:37:05.1391 Info FASTQ read progress for sample DSP-1001660008440-E06 is 75.61 %. 
+ 
+2020-11-24 18:37:11.2808 Info FASTQ read progress for sample DSP-1001660008440-F03 is 78.02 %. 
+ 
+2020-11-24 18:37:14.1755 Info FASTQ read progress for sample DSP-1001660008440-E09 is 46.13 %. 
+ 
+2020-11-24 18:37:16.1046 Info FASTQ read progress for sample DSP-1001660008440-E06 is 86.57 %. 
+ 
+2020-11-24 18:37:18.2916 Info FASTQ read progress for sample DSP-1001660008440-E02 is 42.23 %. 
+ 
+2020-11-24 18:37:22.1849 Info FASTQ read progress for sample DSP-1001660008440-F03 is 91.13 %. 
+ 
+2020-11-24 18:37:27.0637 Info FASTQ read progress for sample DSP-1001660008440-E06 is 97.37 %. 
+ 
+2020-11-24 18:37:29.2815 Info FASTQ read progress for sample DSP-1001660008440-E02 is 49.14 %. 
+ 
+2020-11-24 18:37:29.5989 Info Deduplicating reads for sample DSP-1001660008440-F03 
+ 
+2020-11-24 18:37:29.7505 Info Deduplicating reads for sample DSP-1001660008440-E06 
+ 
+2020-11-24 18:37:31.1169 Info DSP-1001660008440-F03 deduplicated in 1517 ms 
+ 
+2020-11-24 18:37:31.1184 Info DSP-1001660008440-F03 processed in 87063 ms 
+ 
+2020-11-24 18:37:31.1184 Info Processing sample: DSP-1001660008440-F04 
+ 
+2020-11-24 18:37:32.6167 Info DSP-1001660008440-E06 deduplicated in 2865 ms 
+ 
+2020-11-24 18:37:32.6180 Info DSP-1001660008440-E06 processed in 107194 ms 
+ 
+2020-11-24 18:37:32.6180 Info Processing sample: DSP-1001660008440-E07 
+ 
+2020-11-24 18:37:37.5996 Info FASTQ read progress for sample DSP-1001660008440-E09 is 56.56 %. 
+ 
+2020-11-24 18:37:41.7852 Info FASTQ read progress for sample DSP-1001660008440-E02 is 56.40 %. 
+ 
+2020-11-24 18:37:43.1629 Info FASTQ read progress for sample DSP-1001660008440-F04 is 13.07 %. 
+ 
+2020-11-24 18:37:44.4971 Info FASTQ read progress for sample DSP-1001660008440-E07 is 16.31 %. 
+ 
+2020-11-24 18:37:48.9221 Info FASTQ read progress for sample DSP-1001660008440-E09 is 61.83 %. 
+ 
+2020-11-24 18:37:52.8715 Info FASTQ read progress for sample DSP-1001660008440-E02 is 63.66 %. 
+ 
+2020-11-24 18:37:54.1921 Info FASTQ read progress for sample DSP-1001660008440-F04 is 26.10 %. 
+ 
+2020-11-24 18:37:55.5791 Info FASTQ read progress for sample DSP-1001660008440-E07 is 32.50 %. 
+ 
+2020-11-24 18:37:59.9395 Info FASTQ read progress for sample DSP-1001660008440-E09 is 67.11 %. 
+ 
+2020-11-24 18:38:03.8090 Info FASTQ read progress for sample DSP-1001660008440-E02 is 70.90 %. 
+ 
+2020-11-24 18:38:05.0389 Info FASTQ read progress for sample DSP-1001660008440-F04 is 38.99 %. 
+ 
+2020-11-24 18:38:06.5622 Info FASTQ read progress for sample DSP-1001660008440-E07 is 48.45 %. 
+ 
+2020-11-24 18:38:10.9219 Info FASTQ read progress for sample DSP-1001660008440-E09 is 72.39 %. 
+ 
+2020-11-24 18:38:14.7182 Info FASTQ read progress for sample DSP-1001660008440-E02 is 78.13 %. 
+ 
+2020-11-24 18:38:17.5366 Info FASTQ read progress for sample DSP-1001660008440-E07 is 65.10 %. 
+ 
+2020-11-24 18:38:21.9189 Info FASTQ read progress for sample DSP-1001660008440-E09 is 77.66 %. 
+ 
+2020-11-24 18:38:25.6592 Info FASTQ read progress for sample DSP-1001660008440-E02 is 85.37 %. 
+ 
+2020-11-24 18:38:26.7006 Info FASTQ read progress for sample DSP-1001660008440-F04 is 65.23 %. 
+ 
+2020-11-24 18:38:28.4449 Info FASTQ read progress for sample DSP-1001660008440-E07 is 81.75 %. 
+ 
+2020-11-24 18:38:32.8714 Info FASTQ read progress for sample DSP-1001660008440-E09 is 82.93 %. 
+ 
+2020-11-24 18:38:36.5773 Info FASTQ read progress for sample DSP-1001660008440-E02 is 92.47 %. 
+ 
+2020-11-24 18:38:37.5280 Info FASTQ read progress for sample DSP-1001660008440-F04 is 78.52 %. 
+ 
+2020-11-24 18:38:39.3424 Info FASTQ read progress for sample DSP-1001660008440-E07 is 98.18 %. 
+ 
+2020-11-24 18:38:40.5385 Info Deduplicating reads for sample DSP-1001660008440-E07 
+ 
+2020-11-24 18:38:41.6538 Info DSP-1001660008440-E07 deduplicated in 1114 ms 
+ 
+2020-11-24 18:38:41.6538 Info DSP-1001660008440-E07 processed in 69035 ms 
+ 
+2020-11-24 18:38:41.6538 Info Processing sample: DSP-1001660008440-E08 
+ 
+2020-11-24 18:38:44.1109 Info FASTQ read progress for sample DSP-1001660008440-E09 is 88.15 %. 
+ 
+2020-11-24 18:38:48.1301 Info FASTQ read progress for sample DSP-1001660008440-E02 is 99.54 %. 
+ 
+2020-11-24 18:38:48.8485 Info Deduplicating reads for sample DSP-1001660008440-E02 
+ 
+2020-11-24 18:38:49.2283 Info FASTQ read progress for sample DSP-1001660008440-F04 is 91.69 %. 
+ 
+2020-11-24 18:38:52.0231 Info DSP-1001660008440-E02 deduplicated in 3174 ms 
+ 
+2020-11-24 18:38:52.0231 Info DSP-1001660008440-E02 processed in 160999 ms 
+ 
+2020-11-24 18:38:52.0259 Info Processing sample: DSP-1001660008440-F05 
+ 
+2020-11-24 18:38:53.9255 Info FASTQ read progress for sample DSP-1001660008440-E08 is 6.23 %. 
+ 
+2020-11-24 18:38:56.7416 Info FASTQ read progress for sample DSP-1001660008440-E09 is 93.34 %. 
+ 
+2020-11-24 18:38:57.3044 Info Deduplicating reads for sample DSP-1001660008440-F04 
+ 
+2020-11-24 18:39:00.4413 Info DSP-1001660008440-F04 deduplicated in 3136 ms 
+ 
+2020-11-24 18:39:00.4427 Info DSP-1001660008440-F04 processed in 89323 ms 
+ 
+2020-11-24 18:39:00.4427 Info Processing sample: DSP-1001660008440-F09 
+ 
+2020-11-24 18:39:04.7673 Info FASTQ read progress for sample DSP-1001660008440-F05 is 6.07 %. 
+ 
+2020-11-24 18:39:06.7560 Info FASTQ read progress for sample DSP-1001660008440-E08 is 12.50 %. 
+ 
+2020-11-24 18:39:09.5015 Info FASTQ read progress for sample DSP-1001660008440-E09 is 98.49 %. 
+ 
+2020-11-24 18:39:12.3458 Info FASTQ read progress for sample DSP-1001660008440-F09 is 8.73 %. 
+ 
+2020-11-24 18:39:12.8160 Info Deduplicating reads for sample DSP-1001660008440-E09 
+ 
+2020-11-24 18:39:17.1272 Info FASTQ read progress for sample DSP-1001660008440-F05 is 12.18 %. 
+ 
+2020-11-24 18:39:18.9087 Info DSP-1001660008440-E09 deduplicated in 6091 ms 
+ 
+2020-11-24 18:39:18.9101 Info DSP-1001660008440-E09 processed in 229275 ms 
+ 
+2020-11-24 18:39:18.9101 Info Processing sample: DSP-1001660008440-E10 
+ 
+2020-11-24 18:39:19.7066 Info FASTQ read progress for sample DSP-1001660008440-E08 is 18.74 %. 
+ 
+2020-11-24 18:39:25.1327 Info FASTQ read progress for sample DSP-1001660008440-F09 is 17.45 %. 
+ 
+2020-11-24 18:39:28.9494 Info FASTQ read progress for sample DSP-1001660008440-F05 is 18.29 %. 
+ 
+2020-11-24 18:39:30.1763 Info FASTQ read progress for sample DSP-1001660008440-E10 is 40.90 %. 
+ 
+2020-11-24 18:39:31.0064 Info FASTQ read progress for sample DSP-1001660008440-E08 is 24.96 %. 
+ 
+2020-11-24 18:39:36.1326 Info FASTQ read progress for sample DSP-1001660008440-F09 is 26.12 %. 
+ 
+2020-11-24 18:39:39.8617 Info FASTQ read progress for sample DSP-1001660008440-F05 is 24.34 %. 
+ 
+2020-11-24 18:39:40.9903 Info FASTQ read progress for sample DSP-1001660008440-E10 is 82.59 %. 
+ 
+2020-11-24 18:39:42.0726 Info FASTQ read progress for sample DSP-1001660008440-E08 is 31.17 %. 
+ 
+2020-11-24 18:39:45.5204 Info Deduplicating reads for sample DSP-1001660008440-E10 
+ 
+2020-11-24 18:39:45.9148 Info DSP-1001660008440-E10 deduplicated in 393 ms 
+ 
+2020-11-24 18:39:45.9148 Info DSP-1001660008440-E10 processed in 27004 ms 
+ 
+2020-11-24 18:39:45.9176 Info Processing sample: DSP-1001660008440-E11 
+ 
+2020-11-24 18:39:47.0271 Info FASTQ read progress for sample DSP-1001660008440-F09 is 34.76 %. 
+ 
+2020-11-24 18:39:47.8172 Info Deduplicating reads for sample DSP-1001660008440-E11 
+ 
+2020-11-24 18:39:47.8460 Info DSP-1001660008440-E11 deduplicated in 28 ms 
+ 
+2020-11-24 18:39:47.8460 Info DSP-1001660008440-E11 processed in 1929 ms 
+ 
+2020-11-24 18:39:47.8460 Info Processing sample: DSP-1001660008440-E12 
+ 
+2020-11-24 18:39:50.9838 Info FASTQ read progress for sample DSP-1001660008440-F05 is 30.39 %. 
+ 
+2020-11-24 18:39:53.5910 Info FASTQ read progress for sample DSP-1001660008440-E08 is 37.34 %. 
+ 
+2020-11-24 18:39:58.6795 Info FASTQ read progress for sample DSP-1001660008440-F09 is 43.27 %. 
+ 
+2020-11-24 18:39:59.3840 Info FASTQ read progress for sample DSP-1001660008440-E12 is 5.59 %. 
+ 
+2020-11-24 18:40:02.5411 Info FASTQ read progress for sample DSP-1001660008440-F05 is 36.42 %. 
+ 
+2020-11-24 18:40:05.0755 Info FASTQ read progress for sample DSP-1001660008440-E08 is 43.44 %. 
+ 
+2020-11-24 18:40:09.8963 Info FASTQ read progress for sample DSP-1001660008440-F09 is 51.87 %. 
+ 
+2020-11-24 18:40:10.5621 Info FASTQ read progress for sample DSP-1001660008440-E12 is 11.21 %. 
+ 
+2020-11-24 18:40:13.6416 Info FASTQ read progress for sample DSP-1001660008440-F05 is 42.35 %. 
+ 
+2020-11-24 18:40:16.2336 Info FASTQ read progress for sample DSP-1001660008440-E08 is 49.55 %. 
+ 
+2020-11-24 18:40:20.9174 Info FASTQ read progress for sample DSP-1001660008440-F09 is 60.80 %. 
+ 
+2020-11-24 18:40:21.5666 Info FASTQ read progress for sample DSP-1001660008440-E12 is 16.82 %. 
+ 
+2020-11-24 18:40:24.5711 Info FASTQ read progress for sample DSP-1001660008440-F05 is 48.31 %. 
+ 
+2020-11-24 18:40:27.2868 Info FASTQ read progress for sample DSP-1001660008440-E08 is 55.95 %. 
+ 
+2020-11-24 18:40:31.8442 Info FASTQ read progress for sample DSP-1001660008440-F09 is 69.68 %. 
+ 
+2020-11-24 18:40:32.4794 Info FASTQ read progress for sample DSP-1001660008440-E12 is 22.37 %. 
+ 
+2020-11-24 18:40:35.5079 Info FASTQ read progress for sample DSP-1001660008440-F05 is 54.49 %. 
+ 
+2020-11-24 18:40:42.7817 Info FASTQ read progress for sample DSP-1001660008440-F09 is 78.57 %. 
+ 
+2020-11-24 18:40:43.4377 Info FASTQ read progress for sample DSP-1001660008440-E12 is 27.96 %. 
+ 
+2020-11-24 18:40:46.4349 Info FASTQ read progress for sample DSP-1001660008440-F05 is 60.73 %. 
+ 
+2020-11-24 18:40:49.3556 Info FASTQ read progress for sample DSP-1001660008440-E08 is 68.73 %. 
+ 
+2020-11-24 18:40:53.7322 Info FASTQ read progress for sample DSP-1001660008440-F09 is 87.43 %. 
+ 
+2020-11-24 18:40:54.3553 Info FASTQ read progress for sample DSP-1001660008440-E12 is 33.54 %. 
+ 
+2020-11-24 18:40:57.3190 Info FASTQ read progress for sample DSP-1001660008440-F05 is 66.97 %. 
+ 
+2020-11-24 18:41:00.3818 Info FASTQ read progress for sample DSP-1001660008440-E08 is 75.12 %. 
+ 
+2020-11-24 18:41:04.6171 Info FASTQ read progress for sample DSP-1001660008440-F09 is 96.17 %. 
+ 
+2020-11-24 18:41:05.2453 Info FASTQ read progress for sample DSP-1001660008440-E12 is 39.03 %. 
+ 
+2020-11-24 18:41:08.1928 Info FASTQ read progress for sample DSP-1001660008440-F05 is 73.18 %. 
+ 
+2020-11-24 18:41:09.4199 Info Deduplicating reads for sample DSP-1001660008440-F09 
+ 
+2020-11-24 18:41:12.0026 Info FASTQ read progress for sample DSP-1001660008440-E08 is 81.49 %. 
+ 
+2020-11-24 18:41:12.5994 Info DSP-1001660008440-F09 deduplicated in 3178 ms 
+ 
+2020-11-24 18:41:12.5994 Info DSP-1001660008440-F09 processed in 132156 ms 
+ 
+2020-11-24 18:41:12.6023 Info Processing sample: DSP-1001660008440-F10 
+ 
+2020-11-24 18:41:17.2843 Info FASTQ read progress for sample DSP-1001660008440-E12 is 44.52 %. 
+ 
+2020-11-24 18:41:20.4221 Info FASTQ read progress for sample DSP-1001660008440-F05 is 79.39 %. 
+ 
+2020-11-24 18:41:23.8777 Info FASTQ read progress for sample DSP-1001660008440-E08 is 87.84 %. 
+ 
+2020-11-24 18:41:24.1031 Info FASTQ read progress for sample DSP-1001660008440-F10 is 6.06 %. 
+ 
+2020-11-24 18:41:28.6293 Info FASTQ read progress for sample DSP-1001660008440-E12 is 50.00 %. 
+ 
+2020-11-24 18:41:31.7033 Info FASTQ read progress for sample DSP-1001660008440-F05 is 85.60 %. 
+ 
+2020-11-24 18:41:34.9818 Info FASTQ read progress for sample DSP-1001660008440-E08 is 94.12 %. 
+ 
+2020-11-24 18:41:35.1720 Info FASTQ read progress for sample DSP-1001660008440-F10 is 12.16 %. 
+ 
+2020-11-24 18:41:39.6406 Info FASTQ read progress for sample DSP-1001660008440-E12 is 55.74 %. 
+ 
+2020-11-24 18:41:42.9412 Info FASTQ read progress for sample DSP-1001660008440-F05 is 91.68 %. 
+ 
+2020-11-24 18:41:45.5683 Info Deduplicating reads for sample DSP-1001660008440-E08 
+ 
+2020-11-24 18:41:46.4777 Info FASTQ read progress for sample DSP-1001660008440-F10 is 18.23 %. 
+ 
+2020-11-24 18:41:49.2778 Info DSP-1001660008440-E08 deduplicated in 3708 ms 
+ 
+2020-11-24 18:41:49.2778 Info DSP-1001660008440-E08 processed in 187622 ms 
+ 
+2020-11-24 18:41:49.2778 Info Processing sample: DSP-1001660008440-G01 
+ 
+2020-11-24 18:41:51.8051 Info FASTQ read progress for sample DSP-1001660008440-E12 is 61.46 %. 
+ 
+2020-11-24 18:41:55.1338 Info FASTQ read progress for sample DSP-1001660008440-F05 is 97.81 %. 
+ 
+2020-11-24 18:41:58.7881 Info FASTQ read progress for sample DSP-1001660008440-F10 is 24.27 %. 
+ 
+2020-11-24 18:41:59.3207 Info Deduplicating reads for sample DSP-1001660008440-F05 
+ 
+2020-11-24 18:42:01.1901 Info FASTQ read progress for sample DSP-1001660008440-G01 is 7.03 %. 
+ 
+2020-11-24 18:42:03.4623 Info DSP-1001660008440-F05 deduplicated in 4141 ms 
+ 
+2020-11-24 18:42:03.4623 Info DSP-1001660008440-F05 processed in 191438 ms 
+ 
+2020-11-24 18:42:03.4623 Info Processing sample: DSP-1001660008440-F06 
+ 
+2020-11-24 18:42:03.9996 Info FASTQ read progress for sample DSP-1001660008440-E12 is 67.18 %. 
+ 
+2020-11-24 18:42:13.5690 Info FASTQ read progress for sample DSP-1001660008440-G01 is 14.09 %. 
+ 
+2020-11-24 18:42:15.4052 Info FASTQ read progress for sample DSP-1001660008440-F06 is 5.98 %. 
+ 
+2020-11-24 18:42:16.0241 Info FASTQ read progress for sample DSP-1001660008440-E12 is 72.89 %. 
+ 
+2020-11-24 18:42:22.5910 Info FASTQ read progress for sample DSP-1001660008440-F10 is 36.29 %. 
+ 
+2020-11-24 18:42:24.7013 Info FASTQ read progress for sample DSP-1001660008440-G01 is 21.09 %. 
+ 
+2020-11-24 18:42:26.5093 Info FASTQ read progress for sample DSP-1001660008440-F06 is 12.01 %. 
+ 
+2020-11-24 18:42:27.2412 Info FASTQ read progress for sample DSP-1001660008440-E12 is 78.60 %. 
+ 
+2020-11-24 18:42:33.7176 Info FASTQ read progress for sample DSP-1001660008440-F10 is 42.20 %. 
+ 
+2020-11-24 18:42:35.7518 Info FASTQ read progress for sample DSP-1001660008440-G01 is 28.08 %. 
+ 
+2020-11-24 18:42:37.5803 Info FASTQ read progress for sample DSP-1001660008440-F06 is 18.05 %. 
+ 
+2020-11-24 18:42:38.2865 Info FASTQ read progress for sample DSP-1001660008440-E12 is 84.32 %. 
+ 
+2020-11-24 18:42:44.6449 Info FASTQ read progress for sample DSP-1001660008440-F10 is 48.12 %. 
+ 
+2020-11-24 18:42:46.6527 Info FASTQ read progress for sample DSP-1001660008440-G01 is 35.08 %. 
+ 
+2020-11-24 18:42:48.5525 Info FASTQ read progress for sample DSP-1001660008440-F06 is 24.01 %. 
+ 
+2020-11-24 18:42:49.2786 Info FASTQ read progress for sample DSP-1001660008440-E12 is 89.94 %. 
+ 
+2020-11-24 18:42:55.5917 Info FASTQ read progress for sample DSP-1001660008440-F10 is 54.47 %. 
+ 
+2020-11-24 18:42:57.5761 Info FASTQ read progress for sample DSP-1001660008440-G01 is 41.94 %. 
+ 
+2020-11-24 18:42:59.4578 Info FASTQ read progress for sample DSP-1001660008440-F06 is 29.98 %. 
+ 
+2020-11-24 18:43:00.1441 Info FASTQ read progress for sample DSP-1001660008440-E12 is 95.58 %. 
+ 
+2020-11-24 18:43:06.5985 Info FASTQ read progress for sample DSP-1001660008440-F10 is 60.88 %. 
+ 
+2020-11-24 18:43:08.4907 Info FASTQ read progress for sample DSP-1001660008440-G01 is 48.83 %. 
+ 
+2020-11-24 18:43:08.8107 Info Deduplicating reads for sample DSP-1001660008440-E12 
+ 
+2020-11-24 18:43:10.7467 Info FASTQ read progress for sample DSP-1001660008440-F06 is 35.93 %. 
+ 
+2020-11-24 18:43:14.1659 Info DSP-1001660008440-E12 deduplicated in 5354 ms 
+ 
+2020-11-24 18:43:14.1659 Info DSP-1001660008440-E12 processed in 206318 ms 
+ 
+2020-11-24 18:43:18.6087 Info FASTQ read progress for sample DSP-1001660008440-F10 is 67.31 %. 
+ 
+2020-11-24 18:43:20.4224 Info FASTQ read progress for sample DSP-1001660008440-G01 is 56.01 %. 
+ 
+2020-11-24 18:43:22.2467 Info FASTQ read progress for sample DSP-1001660008440-F06 is 41.75 %. 
+ 
+2020-11-24 18:43:29.2356 Info FASTQ read progress for sample DSP-1001660008440-F10 is 73.73 %. 
+ 
+2020-11-24 18:43:31.0321 Info FASTQ read progress for sample DSP-1001660008440-G01 is 63.20 %. 
+ 
+2020-11-24 18:43:32.8121 Info FASTQ read progress for sample DSP-1001660008440-F06 is 47.63 %. 
+ 
+2020-11-24 18:43:39.8368 Info FASTQ read progress for sample DSP-1001660008440-F10 is 80.07 %. 
+ 
+2020-11-24 18:43:41.5955 Info FASTQ read progress for sample DSP-1001660008440-G01 is 70.37 %. 
+ 
+2020-11-24 18:43:43.4059 Info FASTQ read progress for sample DSP-1001660008440-F06 is 53.65 %. 
+ 
+2020-11-24 18:43:50.5110 Info FASTQ read progress for sample DSP-1001660008440-F10 is 86.40 %. 
+ 
+2020-11-24 18:43:52.3393 Info FASTQ read progress for sample DSP-1001660008440-G01 is 77.55 %. 
+ 
+2020-11-24 18:43:54.1064 Info FASTQ read progress for sample DSP-1001660008440-F06 is 59.83 %. 
+ 
+2020-11-24 18:44:01.0913 Info FASTQ read progress for sample DSP-1001660008440-F10 is 92.60 %. 
+ 
+2020-11-24 18:44:02.9505 Info FASTQ read progress for sample DSP-1001660008440-G01 is 84.74 %. 
+ 
+2020-11-24 18:44:04.6666 Info FASTQ read progress for sample DSP-1001660008440-F06 is 65.98 %. 
+ 
+2020-11-24 18:44:11.6989 Info FASTQ read progress for sample DSP-1001660008440-F10 is 98.74 %. 
+ 
+2020-11-24 18:44:13.5751 Info FASTQ read progress for sample DSP-1001660008440-G01 is 91.76 %. 
+ 
+2020-11-24 18:44:13.8041 Info Deduplicating reads for sample DSP-1001660008440-F10 
+ 
+2020-11-24 18:44:15.5099 Info FASTQ read progress for sample DSP-1001660008440-F06 is 72.11 %. 
+ 
+2020-11-24 18:44:17.6273 Info DSP-1001660008440-F10 deduplicated in 3822 ms 
+ 
+2020-11-24 18:44:17.6273 Info DSP-1001660008440-F10 processed in 185026 ms 
+ 
+2020-11-24 18:44:17.6297 Info Processing sample: DSP-1001660008440-F11 
+ 
+2020-11-24 18:44:25.4395 Info FASTQ read progress for sample DSP-1001660008440-G01 is 98.83 %. 
+ 
+2020-11-24 18:44:27.2542 Info Deduplicating reads for sample DSP-1001660008440-G01 
+ 
+2020-11-24 18:44:27.3235 Info FASTQ read progress for sample DSP-1001660008440-F06 is 78.25 %. 
+ 
+2020-11-24 18:44:29.0747 Info FASTQ read progress for sample DSP-1001660008440-F11 is 5.72 %. 
+ 
+2020-11-24 18:44:30.0112 Info DSP-1001660008440-G01 deduplicated in 2756 ms 
+ 
+2020-11-24 18:44:30.0112 Info DSP-1001660008440-G01 processed in 160732 ms 
+ 
+2020-11-24 18:44:38.6999 Info FASTQ read progress for sample DSP-1001660008440-F06 is 84.38 %. 
+ 
+2020-11-24 18:44:40.1909 Info FASTQ read progress for sample DSP-1001660008440-F11 is 11.48 %. 
+ 
+2020-11-24 18:44:49.2967 Info FASTQ read progress for sample DSP-1001660008440-F06 is 90.38 %. 
+ 
+2020-11-24 18:44:50.7537 Info FASTQ read progress for sample DSP-1001660008440-F11 is 17.22 %. 
+ 
+2020-11-24 18:44:59.7200 Info FASTQ read progress for sample DSP-1001660008440-F06 is 96.43 %. 
+ 
+2020-11-24 18:45:01.1485 Info FASTQ read progress for sample DSP-1001660008440-F11 is 22.89 %. 
+ 
+2020-11-24 18:45:05.9297 Info Deduplicating reads for sample DSP-1001660008440-F06 
+ 
+2020-11-24 18:45:09.4687 Info DSP-1001660008440-F06 deduplicated in 3538 ms 
+ 
+2020-11-24 18:45:09.4701 Info DSP-1001660008440-F06 processed in 186005 ms 
+ 
+2020-11-24 18:45:09.4701 Info Processing sample: DSP-1001660008440-F07 
+ 
+2020-11-24 18:45:12.3324 Info FASTQ read progress for sample DSP-1001660008440-F11 is 28.61 %. 
+ 
+2020-11-24 18:45:20.6559 Info FASTQ read progress for sample DSP-1001660008440-F07 is 7.66 %. 
+ 
+2020-11-24 18:45:23.3079 Info FASTQ read progress for sample DSP-1001660008440-F11 is 34.32 %. 
+ 
+2020-11-24 18:45:31.2603 Info FASTQ read progress for sample DSP-1001660008440-F07 is 15.32 %. 
+ 
+2020-11-24 18:45:33.8489 Info FASTQ read progress for sample DSP-1001660008440-F11 is 39.93 %. 
+ 
+2020-11-24 18:45:41.6870 Info FASTQ read progress for sample DSP-1001660008440-F07 is 22.91 %. 
+ 
+2020-11-24 18:45:44.2580 Info FASTQ read progress for sample DSP-1001660008440-F11 is 45.58 %. 
+ 
+2020-11-24 18:45:52.1252 Info FASTQ read progress for sample DSP-1001660008440-F07 is 30.55 %. 
+ 
+2020-11-24 18:45:54.6563 Info FASTQ read progress for sample DSP-1001660008440-F11 is 51.22 %. 
+ 
+2020-11-24 18:46:02.5048 Info FASTQ read progress for sample DSP-1001660008440-F07 is 38.10 %. 
+ 
+2020-11-24 18:46:05.0332 Info FASTQ read progress for sample DSP-1001660008440-F11 is 57.13 %. 
+ 
+2020-11-24 18:46:12.8293 Info FASTQ read progress for sample DSP-1001660008440-F07 is 45.58 %. 
+ 
+2020-11-24 18:46:15.3894 Info FASTQ read progress for sample DSP-1001660008440-F11 is 63.00 %. 
+ 
+2020-11-24 18:46:23.2118 Info FASTQ read progress for sample DSP-1001660008440-F07 is 53.18 %. 
+ 
+2020-11-24 18:46:25.7578 Info FASTQ read progress for sample DSP-1001660008440-F11 is 68.86 %. 
+ 
+2020-11-24 18:46:33.5726 Info FASTQ read progress for sample DSP-1001660008440-F07 is 61.03 %. 
+ 
+2020-11-24 18:46:36.0971 Info FASTQ read progress for sample DSP-1001660008440-F11 is 74.73 %. 
+ 
+2020-11-24 18:46:43.9702 Info FASTQ read progress for sample DSP-1001660008440-F07 is 68.84 %. 
+ 
+2020-11-24 18:46:46.4715 Info FASTQ read progress for sample DSP-1001660008440-F11 is 80.59 %. 
+ 
+2020-11-24 18:46:54.3460 Info FASTQ read progress for sample DSP-1001660008440-F07 is 76.66 %. 
+ 
+2020-11-24 18:46:56.8289 Info FASTQ read progress for sample DSP-1001660008440-F11 is 86.44 %. 
+ 
+2020-11-24 18:47:04.7682 Info FASTQ read progress for sample DSP-1001660008440-F07 is 84.48 %. 
+ 
+2020-11-24 18:47:07.1858 Info FASTQ read progress for sample DSP-1001660008440-F11 is 92.20 %. 
+ 
+2020-11-24 18:47:15.1278 Info FASTQ read progress for sample DSP-1001660008440-F07 is 92.15 %. 
+ 
+2020-11-24 18:47:17.5324 Info FASTQ read progress for sample DSP-1001660008440-F11 is 97.97 %. 
+ 
+2020-11-24 18:47:21.1427 Info Deduplicating reads for sample DSP-1001660008440-F11 
+ 
+2020-11-24 18:47:24.5328 Info DSP-1001660008440-F11 deduplicated in 3389 ms 
+ 
+2020-11-24 18:47:24.5340 Info DSP-1001660008440-F11 processed in 186904 ms 
+ 
+2020-11-24 18:47:24.5340 Info Processing sample: DSP-1001660008440-F12 
+ 
+2020-11-24 18:47:26.1104 Info FASTQ read progress for sample DSP-1001660008440-F07 is 99.83 %. 
+ 
+2020-11-24 18:47:26.3323 Info Deduplicating reads for sample DSP-1001660008440-F07 
+ 
+2020-11-24 18:47:29.0147 Info DSP-1001660008440-F07 deduplicated in 2681 ms 
+ 
+2020-11-24 18:47:29.0147 Info DSP-1001660008440-F07 processed in 139544 ms 
+ 
+2020-11-24 18:47:29.0147 Info Processing sample: DSP-1001660008440-F08 
+ 
+2020-11-24 18:47:35.9820 Info FASTQ read progress for sample DSP-1001660008440-F12 is 6.19 %. 
+ 
+2020-11-24 18:47:40.2058 Info FASTQ read progress for sample DSP-1001660008440-F08 is 10.12 %. 
+ 
+2020-11-24 18:47:47.1012 Info FASTQ read progress for sample DSP-1001660008440-F12 is 12.42 %. 
+ 
+2020-11-24 18:47:50.9178 Info FASTQ read progress for sample DSP-1001660008440-F08 is 20.19 %. 
+ 
+2020-11-24 18:47:57.6964 Info FASTQ read progress for sample DSP-1001660008440-F12 is 18.61 %. 
+ 
+2020-11-24 18:48:01.4369 Info FASTQ read progress for sample DSP-1001660008440-F08 is 30.28 %. 
+ 
+2020-11-24 18:48:08.1560 Info FASTQ read progress for sample DSP-1001660008440-F12 is 24.81 %. 
+ 
+2020-11-24 18:48:11.7887 Info FASTQ read progress for sample DSP-1001660008440-F08 is 40.22 %. 
+ 
+2020-11-24 18:48:18.5510 Info FASTQ read progress for sample DSP-1001660008440-F12 is 30.96 %. 
+ 
+2020-11-24 18:48:22.1433 Info FASTQ read progress for sample DSP-1001660008440-F08 is 50.14 %. 
+ 
+2020-11-24 18:48:29.0293 Info FASTQ read progress for sample DSP-1001660008440-F12 is 37.09 %. 
+ 
+2020-11-24 18:48:32.5340 Info FASTQ read progress for sample DSP-1001660008440-F08 is 60.51 %. 
+ 
+2020-11-24 18:48:39.4301 Info FASTQ read progress for sample DSP-1001660008440-F12 is 43.14 %. 
+ 
+2020-11-24 18:48:42.8816 Info FASTQ read progress for sample DSP-1001660008440-F08 is 70.83 %. 
+ 
+2020-11-24 18:48:49.7887 Info FASTQ read progress for sample DSP-1001660008440-F12 is 49.19 %. 
+ 
+2020-11-24 18:48:53.2264 Info FASTQ read progress for sample DSP-1001660008440-F08 is 81.15 %. 
+ 
+2020-11-24 18:49:00.1542 Info FASTQ read progress for sample DSP-1001660008440-F12 is 55.55 %. 
+ 
+2020-11-24 18:49:03.5692 Info FASTQ read progress for sample DSP-1001660008440-F08 is 91.35 %. 
+ 
+2020-11-24 18:49:10.5200 Info FASTQ read progress for sample DSP-1001660008440-F12 is 61.90 %. 
+ 
+2020-11-24 18:49:12.3566 Info Deduplicating reads for sample DSP-1001660008440-F08 
+ 
+2020-11-24 18:49:14.3063 Info DSP-1001660008440-F08 deduplicated in 1949 ms 
+ 
+2020-11-24 18:49:14.3063 Info DSP-1001660008440-F08 processed in 105290 ms 
+ 
+2020-11-24 18:49:21.3156 Info FASTQ read progress for sample DSP-1001660008440-F12 is 68.25 %. 
+ 
+2020-11-24 18:49:31.5451 Info FASTQ read progress for sample DSP-1001660008440-F12 is 74.61 %. 
+ 
+2020-11-24 18:49:41.7855 Info FASTQ read progress for sample DSP-1001660008440-F12 is 80.95 %. 
+ 
+2020-11-24 18:49:51.9860 Info FASTQ read progress for sample DSP-1001660008440-F12 is 87.26 %. 
+ 
+2020-11-24 18:50:02.2124 Info FASTQ read progress for sample DSP-1001660008440-F12 is 93.49 %. 
+ 
+2020-11-24 18:50:12.3969 Info FASTQ read progress for sample DSP-1001660008440-F12 is 99.70 %. 
+ 
+2020-11-24 18:50:12.8878 Info Deduplicating reads for sample DSP-1001660008440-F12 
+ 
+2020-11-24 18:50:15.8715 Info DSP-1001660008440-F12 deduplicated in 2983 ms 
+ 
+2020-11-24 18:50:15.8715 Info DSP-1001660008440-F12 processed in 171337 ms 
+ 
+2020-11-24 18:50:15.8947 Info All done in 1669906 ms 
+ 
