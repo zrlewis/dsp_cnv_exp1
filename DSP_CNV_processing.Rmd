@@ -8,24 +8,23 @@ header-includes:
    - \usepackage[T1]{fontenc}
 mainfont: SourceSansPro
 output:
-  pdf_document
+  pdf_document:
+    extra_dependencies: ["flafter"]
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(echo = TRUE, dev="cairo_pdf")
-
 ```
 
 ## Read in data
 
-```{r warning=FALSE,echo=FALSE}
+```{r warning=FALSE,echo=FALSE, include=FALSE}
 library(tidyverse)
 library(dplyr)
-library(egg)
-#library(plotly)
+library(egg) # for ggarrange
 library(pheatmap)
-library(psych)
+library(psych) # for geometric.mean
 library(reshape2)
 library(RColorBrewer)
 library(colorRamps)
@@ -33,6 +32,19 @@ library(qualpalr)
 library(kableExtra)
 ```
 
+## Experimental conditions
+
+- Four slides at different probe concentrations
+- One 16 nM slide was denatured at 92C instead of 78C (Slide 3)
+
+
+```{r expt conditions}
+slide_number <- c(1,2,3,5)
+denaturation_temperature <- c(78,78,92,78)
+probe_concentration <-c(8,16,16,32)
+
+tibble(slide_number,denaturation_temperature,probe_concentration)
+```
 
 ```{r warning=FALSE}
 counts <- read_tsv("DSP_CNV_e1/output_dedup.txt")
@@ -50,30 +62,31 @@ counts_assigned <- left_join(counts_described,rts)
 
 ```
 
-```{r eval=FALSE}
-ggplot(counts_assigned %>% filter(geneName %in% "ERBB2"), aes(x = AOI, y = count, col= Tissue, shape = as.factor(Size))) + geom_point()
+```{r fig.cap="ERBB2 raw counts."}
+ggplot(counts_assigned %>% 
+         filter(geneName %in% "ERBB2") %>% 
+         filter(Size == 600),
+       aes(x = AOI, y = count, col= Tissue, shape = as.factor(Slide))) + 
+  geom_point() +
+  labs(title="ERBB2 raw counts")
 ```
-```{r eval = FALSE, echo = FALSE}
-S5 <- counts_assigned %>% filter(Slide == 5)
 
-# S5 %>% filter(category %in% "ercc")  %>% filter(Size == 600) %>% ggplot(aes(x = geneName, y = count, col = Tissue)) + geom_point()
-# S5 %>% filter(category %in% "multicopy") %>% filter(Size == 600)  %>% ggplot(aes(x = geneName, y = count, col = Tissue)) + geom_jitter()
-# S5 %>% filter(category %in% "invariant") %>% filter(Size == 600)  %>% ggplot(aes(x = geneName, y = count, col = Tissue)) + geom_point()
-# S5 %>% filter(category %in% "variant") %>% filter(Size == 600) %>% ggplot(aes(x = geneName, y = count, col = Tissue)) + geom_jitter()
+```{r fig.cap="CDKN2A raw counts"}
+ggplot(counts_assigned %>% 
+         filter(geneName %in% "CDKN2A") %>% 
+         filter(Size == 600),
+       aes(x = AOI, y = count, col= Tissue, shape = as.factor(Slide))) + 
+  geom_point() +
+  labs(title="CDKN2A raw counts")
+```
 
-# geo <- exp(mean(log2(S5 %>% filter(category %in% "ercc") %>% select(count) %>% as.matrix())))
-# geo
-
-
-
-
-
-pos <- exp(mean(log2(S5 %>% filter(category %in% "variant") %>% select(count) %>% as.matrix())))
-pos
-
-pos_mean <- mean(S5 %>% filter(category %in% "variant") %>% select(count) %>% as.matrix())
-pos_mean
-
+```{r fig.cap="gap0121_347804.1:2 raw counts"}
+ggplot(counts_assigned %>% 
+         filter(geneName %in% "gap0121_347804.1:2") %>% 
+         filter(Size == 600),
+       aes(x = AOI, y = count, col= Tissue, shape = as.factor(Slide))) + 
+  geom_point() +
+  labs(title="invariant gap0121_347804.1:2 (chr8) raw counts")
 ```
 
 ### Make subsets for each slide
@@ -89,16 +102,6 @@ S3 <- counts_assigned %>% filter(Slide == 3)
 S5 <- counts_assigned %>% filter(Slide == 5)
 ```
 
-## Experimental conditions
-
-```{r}
-slide_number <- c(1,2,3,5)
-denaturation_temperature <- c(78,78,92,78)
-probe_concentration <-c(8,16,16,32)
-
-tibble(slide_number,denaturation_temperature,probe_concentration)
-```
-
 
 ## Multipanel plots
 
@@ -107,45 +110,46 @@ tibble(slide_number,denaturation_temperature,probe_concentration)
 ```{r fig.cap="Normalized counts for slide 1 (8 nM). Counts are divided by the geometric mean of the ERCC negative counts for that slide.", fig.width = 11, fig.height=7}
 
 # find the geometric mean of the negative counts
-neg_mean_S1 <- geometric.mean(
+ercc_geomean_S1 <- geometric.mean(
   S1 %>% 
     filter(category %in% "ercc") %>% 
     filter(Size==600) %>% 
     select(count) %>% as.matrix()
   )
-neg_mean_S1
 
-neg_sd_S1 <- sd(
-  S1 %>% 
-    filter(category %in% "ercc") %>% 
-    filter(Size==600) %>% 
-    select(count) %>% as.matrix()
-  )
+## find the sd
+ercc_sd_S1 <- sd(
+    S1 %>% 
+      filter(category %in% "ercc") %>% 
+      filter(Size==600) %>% 
+      select(count) %>% as.matrix()
+    )
 
 
 variantPlot_S1 <- S1 %>% 
   filter(category %in% c("variant")) %>% 
   filter(Size == 600) %>% 
-  ggplot(aes(x = geneName, y = count/neg_mean_S1, col = Tissue)) + geom_jitter() +
+  ggplot(aes(x = geneName, y =log2( count/ercc_geomean_S1), col = Tissue)) + geom_jitter() +
   theme(legend.position = "none",axis.text.x = element_text(angle = 90)) +
-  scale_y_continuous(limits = c(0,6))+
+  scale_y_continuous(limits = c(0,5))+
   labs(title="Slide 1 - variant") 
+
 
 multicopyPlot_S1 <- S1 %>% 
   filter(category %in% c("multicopy")) %>% 
   filter(Size == 600) %>% 
-  ggplot(aes(x = geneName, y = count/neg_mean_S1, col = Tissue)) + geom_jitter() +
+  ggplot(aes(x = geneName, y = log2(count/ercc_geomean_S1), col = Tissue)) + geom_jitter() +
   theme(axis.text.x = element_text(angle = 90)) +
-#  scale_y_continuous(limits = c(0,6)) +
+  scale_y_continuous(limits = c(0,5)) +
   labs(title="multicopy")
 
 invariantPlot_S1 <- S1 %>% 
   filter(category %in% "invariant") %>% 
   filter(Size == 600) %>% 
-  ggplot(aes(x = chr, y = count/neg_mean_S1, col = Tissue)) + geom_jitter() +
+  ggplot(aes(x = chr, y = log2(count/ercc_geomean_S1), col = Tissue)) + geom_jitter() +
   theme(axis.text.x = element_text(angle = 90),legend.position = "none") +
-  scale_y_continuous(limits = c(0,6)) +
-  labs(title="invariant")
+  scale_y_continuous(limits = c(0,5)) +
+  labs(title="invariant") 
 
 
 slide1<- ggarrange(
@@ -154,7 +158,7 @@ slide1<- ggarrange(
   )
 
 
-#ggsave(slide1,filename = "slide_1_variants_invariants.png",device="png",width = 12, height=6)
+#ggsave(slide1,filename = "slide_1_variants_invariants_transformed.png",device="png",width = 14, height=6)
 
 ```
 
@@ -177,7 +181,7 @@ variantPlot_S5 <- S5 %>%
   ggplot(aes(x = geneName, y = count/neg_mean_S5, col = Tissue)) + geom_jitter() +
   theme(legend.position = "none",axis.text.x = element_text(angle = 90)) +
   scale_y_continuous(limits = c(0,6))+
-  labs(title="Slide 5 - variant")
+  labs(title="Slide 5 - variant") 
 
 multicopyPlot_S5 <- S5 %>% 
   filter(category %in% c("multicopy")) %>% 
@@ -251,7 +255,7 @@ S1 <- counts_assigned %>% filter(Slide == 1)
 ggarrange(
 LOD_plot(S1, "invariant")+theme(axis.text.x = element_blank()),
 LOD_plot(S1, "variant"),
-LOD_plot(S1, "ercc")+theme(axis.text.x = element_blank()))
+LOD_plot(S1, "ercc")+theme(axis.text.x = element_blank())) %>% ggsave(filename = "LOD_Plot_S1.png",device="png",height=10,width=7)
 ```
 
 ```{r fig.width = 11, fig.height=11, fig.cap="Slide 1 with SKBR3 and MCF7 removed because of their high and low counts, respectively. Log-transformed counts for each category with black lines designating the geometric mean of the negative control counts and the blue dashed line showing 2 standard deviations from the geometric mean."}
@@ -336,11 +340,13 @@ chr17_ercc_count
 chr17_probes <- S1 %>%
   filter(chr %in% "chr17") %>%
   filter(Size == 600) %>%
-  ggplot(aes(x = geneName, y = log2(count/chr17_S1_count), col = Tissue)) + geom_jitter(size = 1) +
+  ggplot(aes(x = geneName, y = log2(count/chr17_S1_count), col = Tissue)) + geom_jitter(size = 2) +
   theme(axis.text.x = element_text(angle = 90)) +
-  scale_y_continuous(limits = c(0,6))+
+#  scale_y_continuous(limits = c(0,6))+
   labs(title="chromosome 17")
-chr17_probes
+chr17_probes 
+#chr17_probes %>% ggsave(filename = "chromosome17_probes.png",device="png")
+
 ```
 
 - Affymetrix data are normalized by `log2(CN/2))`
@@ -370,14 +376,41 @@ chr9_S1_count
 chr9_probes <- S1 %>%
   filter(chr %in% "chr9") %>%
   filter(Size == 600) %>%
-  ggplot(aes(x = geneName, y = log2(count/chr9_S1_count), col = Tissue)) + geom_jitter(size = 1) +
+  ggplot(aes(x = geneName, y = log2(count/chr9_S1_count), col = Tissue)) + geom_jitter(size = 2) +
   theme(axis.text.x = element_text(angle = 90)) +
-  scale_y_continuous(limits = c(0,6))+
+ # scale_y_continuous(limits = c(0,6))+
   labs(title="chromosome 9")
-chr9_probes
+chr9_probes 
+#chr9_probes %>% ggsave(filename = "chromosome9_probes.png",device="png")
 
 ```
 
+
+```{r fig.cap="Chromosome 7 probe counts normalized to the counts for invariant probes on that chromosome."}
+
+
+# get the mean count for chromosome 7 on Slide 1
+
+chr7_S1_count <- S1 %>% filter(category %in% "invariant") %>%
+  filter(Size == 600) %>%
+  filter(chr %in% "chr7") %>% 
+  select(count) %>%
+  as.matrix() %>%
+  geometric.mean()
+chr7_S1_count
+
+# plot counts corrected by the mean chromosome 9 count
+
+chr7_probes <- S1 %>%
+  filter(chr %in% "chr7") %>%
+  filter(Size == 600) %>%
+  ggplot(aes(x = geneName, y = log2(count/chr7_S1_count), col = Tissue)) + geom_jitter(size = 1) +
+  theme(axis.text.x = element_text(angle = 90)) +
+  #scale_y_continuous(limits = c(0,6))+
+  labs(title="chromosome 7")
+chr7_probes
+
+```
 
 ## ROI sizes and counts.
 
@@ -436,14 +469,14 @@ inv_mean_S1_50
 tiles <- S1 %>% 
   filter(category %in% c("variant")) %>%
   filter(Size == 600) %>%
-  ggplot(aes(x = start, y = log2(count/neg_mean_S1), col = Tissue)) +
-  geom_jitter( size = 1 ) +
+  ggplot(aes(x = start, y = log2(count/ercc_geomean_S1), col = Tissue)) +
+  geom_jitter( size = 2 ) +
     theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +
   facet_wrap( ~ geneName, strip.position = "bottom", scales = "free_x") +
   theme_bw(base_size = 7) +
-  labs(x = "tile", y = "log2( count/average negative count)")
+  labs(x = "tile", y = "log2( count/geomean negative count)")
 
 tiles
 ggsave(tiles,filename = "tiles_per_locus.png",device="png",width = 10, height = 6)
@@ -462,7 +495,7 @@ heater_norm <- function(dataset, category_to_plot){
   toPlot <- dataset %>% filter(category %in% category_to_plot ) %>%
     dplyr::filter(Size == 600) %>% select(Tissue,geneName,count) %>% 
     dplyr::group_by(Tissue,geneName) %>%
-    dplyr::summarise(countz = log2(mean(count)/neg_mean_S1)) %>%
+    dplyr::summarise(countz = log2(mean(count)/ercc_geomean_S1)) %>%
     pivot_wider(names_from = Tissue, values_from = countz) %>% 
     distinct() %>% 
     data.frame(row.names = "geneName")
@@ -508,12 +541,24 @@ heater_ungrouped <- function(dataset, category_to_plot){
 
 ```
 
-```{r fig.cap="Heatmap of raw counts for slide 1 variants.", fig.height=11,fig.width=11}
+```{r fig.cap="Heatmap of raw counts for slide 1 variants."}
 heater(S1,"variant") %>% ggsave(filename = "variants_raw_counts_heatmap.png",device = "png")
 
 ```
 
-```{r fig.cap="Raw counts of variants for slide 1. Ungrouped each tile."}
+```{r fig.cap="Heatmap of raw counts for slide 1 variants."}
+
+# heater(S1 %>% 
+#          filter(Tissue != "CD45L") %>%
+#          filter(Tissue != "CD45H"),"variant") %>%
+#   ggsave(filename="variants_raw_counts_cell_lines_s1.png",device = "png", height = 7, width = 7)
+
+heater(S1,"variant") %>% ggsave(filename = "variants_raw_counts_heatmap.png",device = "png")
+
+```
+
+
+```{r fig.cap="Raw counts of variants for slide 1. Ungrouped each tile.", fig.height=11,fig.width=11}
 
 # ungrouping the variant probes
 heater_ungrouped(S1,"variant") %>% ggsave(filename = "variants_ungrouped_raw_counts_S1.png",
@@ -567,6 +612,18 @@ heater(counts_assigned %>%
 ```{r fig.cap="ERCC counts for slide 1."}
 heater(S1,"ercc") %>% ggsave(filename = "ercc_raw_counts_heatmap.png", device = "png", height = 11, width = 8)
 ```
+
+```{r fig.cap="Raw counts of variants for slide 5."}
+
+heater(counts_assigned %>% 
+         filter(Slide == 5) %>%
+  #       filter(Tissue != "MCF7") %>%
+         filter(Tissue != "CD45H") %>%
+         filter(Tissue != "CD45L"),"variant") %>% 
+  ggsave(filename = "variants_raw_counts_heatmap_s5.png",device = "png")
+```
+
+
 ```{r fig.cap="ERCC counts for slide 5."}
 heater(counts_assigned %>% 
          filter(Slide == 5),"ercc") %>% 
@@ -640,11 +697,17 @@ cor.test(x = grouped_means_spread$invariant, y = grouped_means_spread$ercc)
 #SNR = target counts / geomean (neg ctl counts)
 
 # let's look at it gene-by-gene
-SNR_gene <- function(dataset, gene_name){
+  SNR_gene <- function(dataset, gene_name){
   
   # calculate the ERCC mean
   ## find the geometric mean of the negative counts
     ercc_geomean <- geometric.mean(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(count) %>% as.matrix()
+      )
+    ercc_sd <- sd(
       dataset %>% 
         filter(category %in% "ercc") %>% 
         filter(Size==600) %>% 
@@ -657,7 +720,7 @@ SNR_gene <- function(dataset, gene_name){
         filter(Size==600) %>% 
         select(count) %>% as.matrix()
 
-  tib <- data.frame(gene_count/ercc_geomean)
+  tib <- data.frame(gene_count/ercc_sd)
    return(tib)
 }
 ```
@@ -668,9 +731,10 @@ SNR_gene <- function(dataset, gene_name){
 
 snr_S1 <- SNR_gene(S1, "NKX2_1") %>% dplyr::rename(conc_8nM = count)
 snr_S2 <- SNR_gene(S2, "NKX2_1") %>% dplyr::rename(conc_16nM = count)
+snr_S3 <- SNR_gene(S3, "NKX2_1") %>% dplyr::rename(conc_16nM92C = count)
 snr_S5 <- SNR_gene(S5, "NKX2_1") %>% dplyr::rename(conc_32nM = count)
 
-nkx_snr <- bind_cols(snr_S1,snr_S2,snr_S5)
+nkx_snr <- bind_cols(snr_S1,snr_S2,snr_S3,snr_S5)
 nkx_snr_melt <- nkx_snr %>% melt()
 
 ggplot(nkx_snr_melt, aes(x = value,col=variable)) + 
@@ -695,6 +759,29 @@ ggplot(erbb2_snr_melt, aes(x = value,col=variable)) +
   labs(x = "SNR", title = "ERBB2")
 
 ```
+
+```{r fig.cap="SNR for CDKN2A. Slide 1."}
+# make a plot for ERBB2
+# dimensions are 140 because 14 ROIs > 600 um * 10 probes per gene
+
+CDKN2A_S1 <- SNR_gene(S1, "CDKN2A") %>% dplyr::rename(conc_8nM = count)
+CDKN2A_S2 <- SNR_gene(S2, "CDKN2A") %>% dplyr::rename(conc_16nM = count)
+CDKN2A_S3 <- SNR_gene(S3, "CDKN2A") %>% dplyr::rename(conc_16nM92C = count)
+CDKN2A_S5 <- SNR_gene(S5, "CDKN2A") %>% dplyr::rename(conc_32nM = count)
+
+CDKN2A_snr <- bind_cols(CDKN2A_S1,CDKN2A_S2,CDKN2A_S3,CDKN2A_S5)
+CDKN2A_snr_melt <- CDKN2A_snr %>% reshape2::melt()
+
+ggplot(CDKN2A_snr_melt, aes(x = value,col=variable)) + 
+  geom_density(alpha=0.5) +
+  labs(x = "SNR", title = "CDKN2A")
+
+```
+
+- Slide 3 (92C) has higher counts than Slide 2. 
+  - Does it have higher SNR?
+
+
 
 ## How do invariants on the same chromosome behave?
 
@@ -730,7 +817,7 @@ inv_plot <- function(dataset, category_to_plot, tissue_choice){
     filter(Tissue %in% tissue_choice) %>%
     filter(Size == 600) %>% 
     ggplot(aes(x = geneName, y = log2(count), col = chr)) + geom_point(size = 1) +
-      theme(axis.text.x = element_text(angle = 90,size=9)) +
+      theme(axis.text.x = element_text(angle = 90), axis.text=element_text(size=7)) +
       labs(title=paste(category_to_plot,tissue_choice,sep = " - Tissue: ")) +
       geom_hline(yintercept=log2(ercc_geomean)) +
       geom_hline(yintercept = log2(ercc_geomean + 2*ercc_sd), color = "blue",lty = 2) +
@@ -751,18 +838,15 @@ ggsave(cell_chr_1, filename = "cell_lines_invariants_slide1.png", device = "png"
 ```{r fig.cap="Invariant counts for slide 5 and two cell lines."}
 cell_chr_5 <- ggarrange(
   inv_plot(S5,"invariant","MDAMB468") + theme(axis.text.x = element_blank(),legend.position = "none" ), 
-  inv_plot(S5,"invariant","BT474")) 
+  inv_plot(S5,"invariant","BT474") ) 
 ggsave(cell_chr_5, filename = "cell_lines_invariants_slide5.png", device = "png", width = 8, height = 8)
 
 ```
 
-
-
-
-```{r fig.cap="Invariant counts for breast cancer tissue on slide 5"}
+```{r fig.cap="Invariant counts for breast cancer tissue on slide 1"}
 tiss_chr <- ggarrange(
-  inv_plot(S5,"invariant","CD45H") + theme(axis.text.x = element_blank(),legend.position = "none" ), 
-  inv_plot(S5,"invariant","CD45L") ) 
+  inv_plot(S1,"invariant","CD45H") + theme(axis.text.x = element_blank(),legend.position = "none" ), 
+  inv_plot(S1,"invariant","CD45L") ) 
 
 
 ggsave(tiss_chr,filename = "tissues_invariants.png", device = "png", width = 8, height = 8)
@@ -771,4 +855,25 @@ ggsave(tiss_chr,filename = "tissues_invariants.png", device = "png", width = 8, 
 ### Invariant observations:
 
 - Chromosome Y counts should be low, but they're generally not lower than other chromosomes. 
+
+
+```{r}
+
+counts_assigned %>% filter(chr %in% c("chrX","chrY")) %>%
+  remove_missing() %>%
+  ggplot(aes(y = count, x=as.factor(Slide),fill=chr)) + geom_boxplot() +
+  labs(x = "Slide", y = "Count") +
+  ggtitle("X vs Y chromosome counts in all tissues")
+
+
+
+counts_assigned %>% filter(chr %in% c("chrX","chrY")) %>%
+  filter(Tissue %in% c("CD45H","CD45L")) %>%
+  remove_missing() %>%
+  ggplot(aes(y = count, x=as.factor(Slide),fill=chr)) + geom_boxplot() +
+  labs(x = "Slide", y = "Count") +
+  ggtitle("X vs Y chromosome counts in breast cancer tissue")
+
+
+```
 
