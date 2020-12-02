@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = TRUE, dev="cairo_pdf")
 ```{r warning=FALSE,echo=FALSE, include=FALSE}
 library(tidyverse)
 library(dplyr)
-library(egg) # for ggarrange
+#library(egg) # for ggarrange
 library(pheatmap)
 library(psych) # for geometric.mean
 library(reshape2)
@@ -30,6 +30,8 @@ library(RColorBrewer)
 library(colorRamps)
 library(qualpalr)
 library(kableExtra)
+library(ggpubr) # ggarrange and for common labels on ggarrrange plots
+
 ```
 
 ## Experimental conditions
@@ -130,7 +132,7 @@ variantPlot_S1 <- S1 %>%
   filter(category %in% c("variant")) %>% 
   filter(Size == 600) %>% 
   ggplot(aes(x = geneName, y =log2( count/ercc_geomean_S1), col = Tissue)) + geom_jitter() +
-  theme(legend.position = "none",axis.text.x = element_text(angle = 90)) +
+  theme(axis.text.x = element_text(angle = 90)) +
   scale_y_continuous(limits = c(0,5))+
   labs(title="Slide 1 - variant") 
 
@@ -147,14 +149,14 @@ invariantPlot_S1 <- S1 %>%
   filter(category %in% "invariant") %>% 
   filter(Size == 600) %>% 
   ggplot(aes(x = chr, y = log2(count/ercc_geomean_S1), col = Tissue)) + geom_jitter() +
-  theme(axis.text.x = element_text(angle = 90),legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 90)) +
   scale_y_continuous(limits = c(0,5)) +
   labs(title="invariant") 
 
 
 slide1<- ggarrange(
   variantPlot_S1, invariantPlot_S1, multicopyPlot_S1,
-  nrow = 1
+  nrow = 1, common.legened = TRUE
   )
 
 
@@ -876,4 +878,132 @@ counts_assigned %>% filter(chr %in% c("chrX","chrY")) %>%
 
 
 ```
+
+
+## Cell counts
+
+For each cell line in slides 1-3, I counted cells in a FOV using an ImageJ macro
+
+```
+setAutoThreshold("Default dark");
+//run("Threshold...");
+setOption("BlackBackground", false);
+run("Convert to Mask", "method=Triangle background=Dark calculate");
+run("Analyze Particles...", "size=250-Infinity circularity=0.20-1.00 display stack");
+```
+
+- In some cases, I had to manually adjust the threshold:
+  - `Image > Adjust > Threshold`
+  - `Analyze > Analyze particles`
+	  - Set threshold 250-Infinity (pix^2)
+
+-If cells are running together, you can apply the threshold (converts to binary), then `Process > Binary > Watershed`, which will split apart cells at boundaries
+
+
+```{r}
+cell_count_table <- counts_assigned %>% select(Slide,Size,Tissue,Cell_Count) %>% remove_missing() %>% 
+  group_by(Slide,Tissue,Size) %>%
+  summarise(CellCount = mean(Cell_Count))
+
+cell_count_table %>% 
+  filter(Size == 600) %>%
+  filter(Tissue != "CD45H") %>%
+  ggplot(aes(x = as.factor(Slide), y = CellCount, col = Tissue)) + 
+    geom_point(size = 3, alpha = 0.6) +
+    labs(x = "Slide", y = "Cell Count")
+```
+
+
+
+
+## Normalization
+
+- Cell line normalization:
+
+```{r}
+cellLines <- unique(counts_assigned %>% select(Tissue)) %>% filter(Tissue != "NTC")
+
+
+cellLine_geomean <- function(line,slide){
+  counts_assigned %>% 
+  filter(Size == 600) %>%
+  filter(Slide == slide) %>%
+  filter(Tissue %in% line) %>%
+  filter(category %in% "invariant") %>%
+  select(count) %>%
+  as.matrix() %>%
+  geometric.mean()
+}
+
+#cellLine_geomean("SKBR3",1)
+
+
+gm_1<-do.call(rbind.data.frame,
+  lapply(c("SKBR3","BT474","MCF7","MDAMB468", "MDAMB231", "CD45H", "CD45L"),cellLine_geomean,1))
+
+gm_1 <- gm_1 %>% dplyr::rename(invariant_geomean = names(gm_1)[[1]])
+
+gm_cb_1 <- bind_cols(cellLines,gm_1)
+gm_cb_1
+
+
+S1_corr <- S1 %>% left_join(gm_cb_1,by = "Tissue") %>% mutate(corr_count = count/invariant_geomean)
+
+
+var_corr <- S1_corr %>% 
+    filter(category %in% "variant") %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = geneName, y = corr_count * 2, col = Tissue)) + geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    scale_y_continuous(limits = c(0,14)) +
+    labs(title="Variants corrected for invariant geomean", 
+         y = "",
+         x = "Gene")
+
+inv_corr <- S1_corr %>% 
+    filter(category %in% "invariant") %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = chr, y = corr_count * 2)) + geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    scale_y_continuous(limits = c(0,14)) +
+    labs(title="Invariants",y="")
+
+ercc_corr <- S1_corr %>% 
+    filter(category %in% "ercc") %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = geneName, y = corr_count * 2)) + geom_boxplot() +
+    theme(axis.text.x = element_blank()) +
+    scale_y_continuous(limits = c(0,14)) +
+    labs(title="ERCC", y ="")
+
+corr_count_fig_S1 <- ggarrange(var_corr,inv_corr,ercc_corr, 
+                               ncol = 3, align="h", 
+                               common.legend=TRUE,
+                                widths = c(2, 1, 1)) 
+
+corr_count_fig_S1
+  
+annotate_figure(corr_count_fig_S1,
+  left = text_grob("2*Counts in tissue / geomean(invariants in tissue)",rot = 90)) %>% 
+  ggsave(filename = "corrected_counts_slide1_wide.png", device = "png", height = 7, width =14)
+
+```
+
+## Cell count vs. invariant count
+
+```{r}
+
+S1_cell_count <- S1_corr %>% 
+  filter(Size ==600) %>% 
+  select(Tissue,Cell_Count) %>% remove_missing() %>% 
+  group_by(Tissue) %>%
+  summarise(CellCount = mean(Cell_Count))
+
+S1_cells_to_invar <- left_join(S1_cell_count, gm_cb_1, by="Tissue") 
+S1_cells_to_invar %>% ggplot(aes(x = CellCount, y = invariant_geomean)) + geom_point()
+
+
+```
+
+
 
