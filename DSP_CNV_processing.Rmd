@@ -914,13 +914,15 @@ cell_count_table %>%
 ```
 
 
-
-
 ## Normalization
 
 - Cell line normalization:
 
+Below are functions to pull the geomean of the invariant counts for each tissue for slide 1. After that, divide the raw counts by this geomean(invariant) value. I divided the raw counts for the invariants and the ercc controls by that same geomean(invariant) value in the center and right panels. That might correct for tissue-specific differences in overall counts. It does appear to even out the low counts in MCF7 and the high counts in SKBR3.
+
 ```{r}
+# make a new df with geomean of the invariant counts for each row
+
 cellLines <- unique(counts_assigned %>% select(Tissue)) %>% filter(Tissue != "NTC")
 
 
@@ -937,19 +939,31 @@ cellLine_geomean <- function(line,slide){
 
 #cellLine_geomean("SKBR3",1)
 
-
+# lapply for slide 1
 gm_1<-do.call(rbind.data.frame,
-  lapply(c("SKBR3","BT474","MCF7","MDAMB468", "MDAMB231", "CD45H", "CD45L"),cellLine_geomean,1))
-
+  lapply(c("SKBR3","BT474","MCF7","MDAMB468", "MDAMB231", "CD45H", "CD45L"),cellLine_geomean, 1))
 gm_1 <- gm_1 %>% dplyr::rename(invariant_geomean = names(gm_1)[[1]])
-
 gm_cb_1 <- bind_cols(cellLines,gm_1)
-gm_cb_1
-
-
 S1_corr <- S1 %>% left_join(gm_cb_1,by = "Tissue") %>% mutate(corr_count = count/invariant_geomean)
 
+# lapply for slide 3
+gm_3<-do.call(rbind.data.frame,
+  lapply(c("SKBR3","BT474","MCF7","MDAMB468", "MDAMB231", "CD45H", "CD45L"),cellLine_geomean, 3))
+gm_3 <- gm_3 %>% dplyr::rename(invariant_geomean = names(gm_3)[[1]])
+gm_cb_3 <- bind_cols(cellLines,gm_3)
+S3_corr <- S3 %>% left_join(gm_cb_3,by = "Tissue") %>% mutate(corr_count = count/invariant_geomean)
 
+# lapply for slide 5
+gm_5<-do.call(rbind.data.frame,
+  lapply(c("SKBR3","BT474","MCF7","MDAMB468", "MDAMB231", "CD45H", "CD45L"),cellLine_geomean, 5))
+gm_5 <- gm_5 %>% dplyr::rename(invariant_geomean = names(gm_5)[[1]])
+gm_cb_5 <- bind_cols(cellLines,gm_5)
+S5_corr <- S5 %>% left_join(gm_cb_5,by = "Tissue") %>% mutate(corr_count = count/invariant_geomean)
+```
+
+
+
+```{r normalized plot slide1}
 var_corr <- S1_corr %>% 
     filter(category %in% "variant") %>% 
     filter(Size == 600) %>% 
@@ -984,10 +998,302 @@ corr_count_fig_S1 <- ggarrange(var_corr,inv_corr,ercc_corr,
 corr_count_fig_S1
   
 annotate_figure(corr_count_fig_S1,
-  left = text_grob("2*Counts in tissue / geomean(invariants in tissue)",rot = 90)) %>% 
+  left = text_grob("2 * Counts in tissue / geomean(invariants in tissue)",rot = 90)) %>% 
   ggsave(filename = "corrected_counts_slide1_wide.png", device = "png", height = 7, width =14)
 
 ```
+
+```{r normalized plot slide3}
+var_corr <- S3_corr %>% 
+    filter(category %in% "variant") %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = geneName, y = corr_count * 2, col = Tissue)) + geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    scale_y_continuous(limits = c(0,14)) +
+    labs(title="Variants corrected for invariant geomean", 
+         y = "",
+         x = "Gene")
+
+inv_corr <- S3_corr %>% 
+    filter(category %in% "invariant") %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = chr, y = corr_count * 2)) + geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    scale_y_continuous(limits = c(0,14)) +
+    labs(title="Invariants",y="")
+
+ercc_corr <- S3_corr %>% 
+    filter(category %in% "ercc") %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = geneName, y = corr_count * 2)) + geom_boxplot() +
+    theme(axis.text.x = element_blank()) +
+    scale_y_continuous(limits = c(0,14)) +
+    labs(title="ERCC", y ="")
+
+corr_count_fig_S3 <- ggarrange(var_corr,inv_corr,ercc_corr, 
+                               ncol = 3, align="h", 
+                               common.legend=TRUE,
+                                widths = c(2, 1, 1)) 
+
+corr_count_fig_S3
+  
+annotate_figure(corr_count_fig_S3,
+  left = text_grob("2 * Counts in tissue / geomean(invariants in tissue)",rot = 90)) %>% 
+  ggsave(filename = "corrected_counts_slide3_wide.png", device = "png", height = 7, width =14)
+
+```
+
+```{r normalized plot slide5}
+var_corr <- S5_corr %>% 
+    filter(category %in% "variant") %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = geneName, y = corr_count * 2, col = Tissue)) + geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    scale_y_continuous(limits = c(0,14)) +
+    labs(title="Variants corrected for invariant geomean", 
+         y = "",
+         x = "Gene")
+
+
+mc_corr <-  S5_corr %>% 
+    filter(category %in% "multicopy") %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = geneName, y = corr_count * 2, col = Tissue)) + geom_jitter() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    scale_y_continuous(limits = c(0,14)) +
+    labs(title="Multicopy", 
+         y = "",
+         x = "Gene")
+
+inv_corr <- S5_corr %>% 
+    filter(category %in% "invariant") %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = chr, y = corr_count * 2)) + geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    scale_y_continuous(limits = c(0,14)) +
+    labs(title="Invariants",y="")
+
+ercc_corr <- S5_corr %>% 
+    filter(category %in% "ercc") %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = geneName, y = corr_count * 2)) + geom_boxplot() +
+    theme(axis.text.x = element_blank()) +
+    scale_y_continuous(limits = c(0,14)) +
+    labs(title="ERCC", y ="")
+
+corr_count_fig_S5 <- ggarrange(var_corr,mc_corr,
+                               inv_corr,ercc_corr, 
+                               ncol = 2, nrow = 2,
+                                
+                               common.legend=TRUE,
+                                widths = c(1, 1),
+                               heights = c(2,1)) 
+
+corr_count_fig_S5 
+
+corr_count_fig_S5_wide <- ggarrange(var_corr,inv_corr,ercc_corr, 
+                               ncol = 3, align="h", 
+                               common.legend=TRUE,
+                                widths = c(2, 1, 1)) 
+
+annotate_figure(corr_count_fig_S5,
+  left = text_grob("2 * Counts in tissue / geomean(invariants in tissue)",rot = 90)) %>% 
+  ggsave(filename = "corrected_counts_slide5.png", device = "png", height = 12, width =12)
+
+annotate_figure(corr_count_fig_S5_wide,
+  left = text_grob("2 * Counts in tissue / geomean(invariants in tissue)",rot = 90)) %>% 
+  ggsave(filename = "corrected_counts_slide5_wide.png", device = "png", height = 7, width =14)
+
+```
+
+```{r fig.cap="Variants from slide 1. Plot shows the log2-transformed counts that have been normalized to the geometric mean of the invariant markers for that particular tissue. A log2 value of 0 indicates the counts for the variants are equal to the counts for the invariants. The geometric mean of the ERCC controls and 2 standard deviations are shown as black and blue dashed lines, respectively."}
+# plotting slide 1 variants on their own
+# log-transform
+# 
+# var_corr_s1 <- S1_corr %>% 
+#     filter(category %in% "variant") %>% 
+#     filter(Size == 600) %>% 
+#     ggplot(aes(x = geneName, y = log2(2*corr_count), fill = Tissue)) + geom_boxplot() +
+#     theme(axis.text.x = element_text(angle = 90)) +
+#    # scale_y_continuous(limits = c(0,14)) +
+#     labs(title="Variants corrected for invariant geomean", 
+#          y = "log2( counts / geomean(invariants in tissue))",
+#          x = "Gene")
+# var_corr_s1 + theme_bw()
+
+
+
+LOD_norm_plot <- function(dataset, category_to_plot){
+  
+  # calculate the ERCC mean and SD
+  ## find the geometric mean of the negative counts
+    ercc_geomean <- geometric.mean(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(corr_count) %>% as.matrix()
+      )
+  ## find the sd
+    ercc_sd <- sd(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(corr_count) %>% as.matrix()
+      )
+  
+  # generate the plot
+  dataset %>% 
+    filter(category %in% category_to_plot) %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = geneName, y = log2(corr_count), fill = Tissue)) + geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    labs(title=paste(category_to_plot), 
+         y = "log2( counts / geomean(invariants in tissue))",
+         x = "Gene") +
+    geom_hline(yintercept=log2(ercc_geomean)) +
+    geom_hline(yintercept = log2(ercc_geomean + 2*ercc_sd), color = "blue",lty = 2) +
+    scale_y_continuous(limits = c(-1,3))
+    
+}
+var_corr_lod <- LOD_norm_plot(S1_corr,"variant")
+var_corr_lod
+LOD_norm_plot(S1_corr,"variant") %>% 
+  ggsave(filename = "Slide1_variants_norm_to_inv_transformed_LOD.png",device = "png", width = 8, height = 5)
+
+```
+
+```{r fig.cap="Invariants from slide 1. Plot shows the log2-transformed counts that have been normalized to the geometric mean of the invariant markers for that particular tissue. The geometric mean of the ERCC controls and 2 standard deviations are shown as black and blue dashed lines, respectively."}
+
+LOD_norm_plot_inv <- function(dataset, category_to_plot){
+  
+  # calculate the ERCC mean and SD
+  ## find the geometric mean of the negative counts
+    ercc_geomean <- geometric.mean(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(corr_count) %>% as.matrix()
+      )
+  ## find the sd
+    ercc_sd <- sd(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(corr_count) %>% as.matrix()
+      )
+  
+  # generate the plot
+  dataset %>% 
+    filter(category %in% category_to_plot) %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = chr, y = log2(corr_count))) + geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    labs(title=paste(category_to_plot), 
+         y = "log2( counts / geomean(invariants in tissue))",
+         x = "Gene") +
+    geom_hline(yintercept=log2(ercc_geomean)) +
+    geom_hline(yintercept = log2(ercc_geomean + 2*ercc_sd), color = "blue",lty = 2) +
+    scale_y_continuous(limits = c(-1,3))
+}
+inv_corr_lod <- LOD_norm_plot_inv(S1_corr,"invariant")
+inv_corr_lod
+
+LOD_norm_plot_inv(S1_corr,"invariant") %>% 
+  ggsave(filename = "Slide1_invariants_norm_to_inv_transformed_LOD_narrow.png",device = "png", width = 4, height = 5)
+
+
+lod_layout <- ggarrange(var_corr_lod,inv_corr_lod,
+                        widths= c(2.5,1))
+lod_layout %>% ggsave(filename = "Slide1_norm_to_inv_transformed_LOD.png",device = "png", width = 12, height = 5)
+```
+
+
+
+```{r fig.cap="Comparisons of counts normalized to slide and tissue-specific invariant geometric mean for slides 1 and 3. Slide 3 has lower normalized values for each gene, but they are highly correlated."}
+S1_geomeanCounts <- S1_corr %>% 
+  filter(category %in% "variant") %>%
+  filter(Size == 600) %>%
+  dplyr::select(Tissue,geneName,corr_count) %>%
+  group_by(Tissue, geneName) %>%
+  summarise(geomean_counts_s1 = geometric.mean(corr_count))
+
+S3_geomeanCounts <- S3_corr %>% 
+  filter(category %in% "variant") %>%
+  filter(Size == 600) %>%
+  dplyr::select(Tissue,geneName,corr_count) %>%
+  group_by(Tissue, geneName) %>%
+  summarise(geomean_counts_s3 = geometric.mean(corr_count)) %>% 
+  dplyr::select(geomean_counts_s3)
+
+s1_to_s3_comparison <- bind_cols(S1_geomeanCounts,S3_geomeanCounts)
+
+ggplot(s1_to_s3_comparison,aes(x = geomean_counts_s1, y = geomean_counts_s3,col=geneName)) + 
+  geom_point(size = 2) +
+  scale_y_continuous(limits = c(0.8,3.6)) +
+  scale_x_continuous(limits = c(0.8,3.6))
+
+cor.test(x = s1_to_s3_comparison$geomean_counts_s1, y = s1_to_s3_comparison$geomean_counts_s3)
+
+```
+
+```{r fig.cap="Comparisons of counts normalized to slide and tissue-specific invariant geometric mean for slides 1 and 5"}
+S1_geomeanCounts <- S1_corr %>% 
+  filter(category %in% "variant") %>%
+  filter(Size == 600) %>%
+  dplyr::select(Tissue,geneName,corr_count) %>%
+  group_by(Tissue, geneName) %>%
+  summarise(geomean_counts_s1 = geometric.mean(corr_count))
+
+S5_geomeanCounts <- S5_corr %>% 
+  filter(category %in% "variant") %>%
+  filter(Size == 600) %>%
+  dplyr::select(Tissue,geneName,corr_count) %>%
+  group_by(Tissue, geneName) %>%
+  summarise(geomean_counts_s5 = geometric.mean(corr_count)) %>% 
+  dplyr::select(geomean_counts_s5)
+
+s1_to_s5_comparison <- bind_cols(S1_geomeanCounts,S5_geomeanCounts)
+
+ggplot(s1_to_s5_comparison,aes(x = geomean_counts_s1, y = geomean_counts_s5,col=geneName)) + 
+  geom_point(size = 2) +
+  scale_y_continuous(limits = c(0.8,3.6)) +
+  scale_x_continuous(limits = c(0.8,3.6))
+
+cor.test(x = s1_to_s5_comparison$geomean_counts_s1, y = s1_to_s5_comparison$geomean_counts_s5)
+
+```
+
+### Heatmap of normalized counts
+
+```{r fig.cap="heatmap of normalized data for slide 1. Log2(geomean(count / geomean(invariant)))" }
+
+
+heater_normalized <- function(dataset, category_to_plot){
+  toPlot <- dataset %>% filter(category %in% category_to_plot ) %>%
+    dplyr::filter(Size == 600) %>% select(Tissue,geneName,corr_count) %>% 
+    dplyr::group_by(Tissue,geneName) %>%
+    dplyr::summarise(countz = log2( geometric.mean(corr_count))) %>%
+    pivot_wider(names_from = Tissue, values_from = countz) %>% 
+    distinct() %>% 
+    data.frame(row.names = "geneName")
+  
+  pheatmap(data.matrix(toPlot), fontsize = 8)  
+}
+
+
+heater_normalized(S1_corr,"variant")
+heater_normalized(S1_corr,"variant") %>% 
+  ggsave(filename = "slide1_heatmap_norm_to_inv_log2.png",device = "png")
+
+
+heater_normalized(S1_corr %>% filter(Tissue != "CD45H") %>% 
+                    filter(Tissue != "CD45L"),"variant") %>%
+  ggsave(filename = "slide1_heatmap_norm_to_inv_log2_lines.png",device = "png",
+         width = 7, height = 7)
+  
+```
+
+
 
 ## Cell count vs. invariant count
 
@@ -1004,6 +1310,6 @@ S1_cells_to_invar %>% ggplot(aes(x = CellCount, y = invariant_geomean)) + geom_p
 
 
 ```
-
+It doesn't appear that the invariant counts increase with cell counts
 
 
