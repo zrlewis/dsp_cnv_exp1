@@ -22,7 +22,6 @@ knitr::opts_chunk$set(echo = TRUE, dev="cairo_pdf")
 ```{r warning=FALSE,echo=FALSE, include=FALSE}
 library(tidyverse)
 library(dplyr)
-#library(egg) # for ggarrange
 library(pheatmap)
 library(psych) # for geometric.mean
 library(reshape2)
@@ -65,12 +64,16 @@ counts_assigned <- left_join(counts_described,rts)
 ```
 
 ```{r fig.cap="ERBB2 raw counts."}
-ggplot(counts_assigned %>% 
+raw_ERBB2<- ggplot(counts_assigned %>% 
          filter(geneName %in% "ERBB2") %>% 
          filter(Size == 600),
        aes(x = AOI, y = count, col= Tissue, shape = as.factor(Slide))) + 
-  geom_point() +
-  labs(title="ERBB2 raw counts")
+  geom_point(size=4,alpha=0.6) +
+  labs(title="ERBB2 raw counts") +
+  theme(text = element_text(size=14)) +
+  theme_bw()  
+
+ggsave(raw_ERBB2,filename = "rawCounts_EBB2.png",device="png")
 ```
 
 ```{r fig.cap="CDKN2A raw counts"}
@@ -83,12 +86,17 @@ ggplot(counts_assigned %>%
 ```
 
 ```{r fig.cap="gap0121_347804.1:2 raw counts"}
-ggplot(counts_assigned %>% 
+invRaw<-ggplot(counts_assigned %>% 
          filter(geneName %in% "gap0121_347804.1:2") %>% 
          filter(Size == 600),
        aes(x = AOI, y = count, col= Tissue, shape = as.factor(Slide))) + 
-  geom_point() +
-  labs(title="invariant gap0121_347804.1:2 (chr8) raw counts")
+  geom_point(size=4,alpha=0.9) +
+  labs(title="invariant gap0121_347804.1:2 (chr8) raw counts")  +
+  theme(text = element_text(size=14)) +
+  theme_bw()  
+
+ggsave(invRaw,filename = "rawCounts_inv.png",device="png")
+
 ```
 
 ### Make subsets for each slide
@@ -1311,5 +1319,407 @@ S1_cells_to_invar %>% ggplot(aes(x = CellCount, y = invariant_geomean)) + geom_p
 
 ```
 It doesn't appear that the invariant counts increase with cell counts
+
+
+## Per-tile normalization method
+
+- Using CD45H as a baseline, because we assume it's generally diploid, normalize the probe counts on a per-tile basis to those counts
+
+e.g., divide invariant normalized tile data in BT474 by corresponding tile in CD45H for a tile-by-tile CN.
+
+```{r}
+
+# get the per-tile counts for CD45H
+
+cd45_tile_mean <- S1 %>% filter(Tissue %in% "CD45H") %>% 
+  dplyr::group_by(Full_ID) %>%
+  summarize(tileMean = geometric.mean(count))
+
+S1_tile_mean <- left_join(S1, cd45_tile_mean)
+S1_tile_norm <- S1_tile_mean %>% mutate(CD45_normalized_count = count/tileMean)
+S1_tile_norm
+
+# apply the correction for invariant counts on a tissue basis for slide 1
+# first corrects for the tissue-specific counting efficiency and then corrects for the tile-specific biases
+
+S1_tile_norm_corr <- S1_tile_norm %>% left_join(gm_cb_1,by = "Tissue") %>% 
+  mutate(corr_count_norm = (count/invariant_geomean)/tileMean)
+
+```
+
+```{r fig.cap="Counts normalized by CD45H counts on a per-tile basis. This normalization method tightens up the spread on a per-gene basis, but tissue by tissue count variation drive some of the patterns (e.g., MCF7 low and SKBR3 high)", eval=FALSE,include=FALSE}
+LOD_norm_tile_plot <- function(dataset, category_to_plot){
+  
+  # calculate the ERCC mean and SD
+  ## find the geometric mean of the negative counts
+    ercc_geomean <- geometric.mean(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(corr_count_norm) %>% as.matrix()
+      )
+  ## find the sd
+    ercc_sd <- sd(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(corr_count_norm) %>% as.matrix()
+      )
+  
+  # generate the plot
+  dataset %>% 
+    filter(category %in% category_to_plot) %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = geneName, y = log2(corr_count_norm),fill=Tissue)) + geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    labs(title=paste(category_to_plot), 
+         y = "log2( CD45-normalized count )",
+         x = "Gene") +
+    geom_hline(yintercept=log2(ercc_geomean)) +
+    geom_hline(yintercept = log2(ercc_geomean + 2*ercc_sd), color = "blue",lty = 2) #+
+    #scale_y_continuous(limits = c(-1,3))
+    
+}
+var_corr_tile_lod <- LOD_norm_tile_plot(S1_tile_norm,"variant")
+var_corr_tile_lod 
+
+ggsave(var_corr_tile_lod, filename = "Slide1_variants_norm_to_CD45_tiles_LOD.png",device = "png", width = 8, height = 5)
+
+
+LOD_norm_tile_plot(S1_tile_norm_corr,"variant")
+
+```
+
+## Normalization by probe and tissue
+
+- Goal: get the diploid data above noise so that deletions can be detected. 
+- Strategy: similar to the nCounter CN assay, take the geomean of the invariants per sample and then divide that into the average of invariants for all samples to get a normalization factor. Then divide by the reference to get a ratio above diploid.
+
+```{r}
+# make a new df with geomean of the invariant counts for each row
+
+cellLines <- unique(counts_assigned %>% select(Tissue)) %>% filter(Tissue != "NTC")
+
+
+cellLine_geomean <- function(line,slide){
+  counts_assigned %>% 
+  filter(Size == 600) %>%
+  filter(Slide == slide) %>%
+  filter(Tissue %in% line) %>%
+  filter(category %in% "invariant") %>%
+  select(count) %>%
+  as.matrix() %>%
+  geometric.mean()
+}
+
+#cellLine_geomean("SKBR3",1)
+
+# lapply for slide 1
+gm_1<-do.call(rbind.data.frame,
+  lapply(c("SKBR3","BT474","MCF7","MDAMB468", "MDAMB231", "CD45H", "CD45L"),cellLine_geomean, 1))
+gm_1 <- gm_1 %>% dplyr::rename(invariant_geomean = names(gm_1)[[1]])
+gm_cb_1 <- bind_cols(cellLines,gm_1)
+#S1_corr <- S1 %>% left_join(gm_cb_1,by = "Tissue") %>% mutate(corr_count = count/invariant_geomean)
+
+
+# get the per-tile counts for CD45H
+
+cd45_tile_mean <- S1 %>% filter(Tissue %in% "CD45H") %>% 
+  dplyr::group_by(Full_ID) %>%
+  summarize(tileMean = geometric.mean(count))
+
+S1_tile_mean <- left_join(S1, cd45_tile_mean)
+S1_tile_norm <- S1_tile_mean %>% mutate(CD45_normalized_count = count/tileMean)
+S1_tile_norm
+
+# apply the correction for invariant counts on a tissue basis for slide 1
+# first corrects for the tissue-specific counting efficiency and then corrects for the tile-specific biases
+# corr_count_norm = (count/invariant_geomean)/tileMean
+
+# calculate the geomean of all invariants for the slide
+geomean_all_invar_S1 <- S1 %>% 
+  filter(Size == 600) %>%
+  filter(category %in% "invariant") %>%
+  select(count) %>%
+  as.matrix() %>%
+  geometric.mean()
+geomean_all_invar_S1
+
+
+# To generate a normalization factor, divide the mean average value (mean AVE INV from Step 2) by the average count value for each tissue
+# generate normalized counts for each probe by multiplying the RAW counts for each probe by the normalization factor
+# divide each test samples probe value (INV-normalized counts) by the corresponding probes in the reference
+# samples’ INV-normalized counts
+## for DSP CNV we don't want to multiply the "tileMean" or the "reference" count by the normalization factor 
+### because that re-introduces the skew caused by the tissue-specific counting efficiency. 
+
+S1_tile_inv_norm_corr <- S1_tile_norm %>% left_join(gm_cb_1,by = "Tissue") %>% 
+  mutate(normalization_factor = geomean_all_invar_S1 / invariant_geomean) %>% 
+  mutate(counts_times_norm_factor = count * normalization_factor) %>%
+  mutate(corrected_counts = counts_times_norm_factor / tileMean)
+
+```
+
+### Plotting the normalized variants
+
+```{r fig.cap="Normalization by NSTG CN assay method. Create a normalization factor by dividing the overall mean invariant counts by the invariant counts in each tissue. Multiply that normalization factor by the probe counts and then divide by the reference sample counts. Here the reference sample is the geomean of CD45H tile counts."}
+LOD_norm_tile_plot <- function(dataset, category_to_plot){
+  
+  # calculate the ERCC mean and SD
+  ## find the geometric mean of the negative counts
+    ercc_geomean <- geometric.mean(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(corrected_counts) %>% as.matrix()
+      )
+  ## find the sd
+    ercc_sd <- sd(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(corrected_counts) %>% as.matrix()
+      )
+  
+  # generate the plot
+  dataset %>% 
+    filter(category %in% category_to_plot) %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = geneName, y = log2(corrected_counts),fill=Tissue)) + geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    labs(title=paste(category_to_plot), 
+         y = "log2( tissue and reference-normalized counts )",
+         x = "Gene") +
+    geom_hline(yintercept=log2(ercc_geomean)) +
+    geom_hline(yintercept = log2(ercc_geomean + 2*ercc_sd), color = "blue",lty = 2) +
+    scale_y_continuous(limits = c(-0.8,2.2))
+    
+}
+var_norm_plot <- LOD_norm_tile_plot(S1_tile_inv_norm_corr,"variant") 
+var_norm_plot
+ggsave(var_norm_plot, filename = "s1_CNassay_norm_method_var.png",device="png",width = 8, height = 5)
+```
+
+### Do the same for invariants
+
+```{r fig.cap="Invariants normalized by NSTG CN assay method. Create a normalization factor by dividing the mean invariant counts by the invariant counts in each tissue. Multiply that normalization factor by the probe counts and then divide by the reference sample counts. Here the reference sample is the geomean of CD45H tile counts."}
+LOD_norm_tile_plot_forInv <- function(dataset, category_to_plot){
+  
+  # calculate the ERCC mean and SD
+  ## find the geometric mean of the negative counts
+    ercc_geomean <- geometric.mean(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(corrected_counts) %>% as.matrix()
+      )
+  ## find the sd
+    ercc_sd <- sd(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(corrected_counts) %>% as.matrix()
+      )
+  
+  # generate the plot
+  dataset %>% 
+    filter(category %in% category_to_plot) %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = chr, y = log2(corrected_counts))) + geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    labs(title=paste(category_to_plot), 
+         y = "log2( tissue and reference-normalized counts )",
+         x = "Gene") +
+    geom_hline(yintercept=log2(ercc_geomean)) +
+    geom_hline(yintercept = log2(ercc_geomean + 2*ercc_sd), color = "blue",lty = 2) +
+    scale_y_continuous(limits = c(-0.8,2.2))
+    
+}
+inv_norm_plot <- LOD_norm_tile_plot_forInv(S1_tile_inv_norm_corr,"invariant") 
+inv_norm_plot
+ggsave(inv_norm_plot, filename = "s1_CNassay_norm_method_inv.png",device="png",width = 6, height = 5)
+
+lod_layout <- ggarrange(var_norm_plot,inv_norm_plot,
+                        widths= c(2.5,1), align = "h")
+lod_layout %>% ggsave(filename = "Slide1_CNassay_normalization.png",device = "png", width = 12, height = 5)
+```
+
+### Heatmaps using the new normalization scheme
+
+
+```{r fig.cap="heatmap of normalized data for slide 1. Log2(geomean(count / geomean(invariant)))" }
+
+
+heater_new_normalization <- function(dataset, category_to_plot){
+  toPlot <- dataset %>% filter(category %in% category_to_plot ) %>%
+    dplyr::filter(Size == 600) %>% select(Tissue,geneName,corrected_counts) %>% 
+    dplyr::group_by(Tissue,geneName) %>%
+    dplyr::summarise(countz = log2( geometric.mean(corrected_counts))) %>%
+    pivot_wider(names_from = Tissue, values_from = countz) %>% 
+    distinct() %>% 
+    data.frame(row.names = "geneName")
+  
+  pheatmap(data.matrix(toPlot), fontsize = 12)  
+}
+
+
+heater_new_normalization(S1_tile_inv_norm_corr,"variant")
+heater_normalized(S1_corr,"variant") %>% 
+  ggsave(filename = "slide1_heatmap_norm_to_inv_log2.png",device = "png")
+
+
+heater_new_normalization(S1_tile_inv_norm_corr %>% filter(Tissue != "CD45H") %>% 
+                    filter(Tissue != "CD45L"),"variant") %>%
+  ggsave(filename = "S1_heatmap_CNassay_normalization_lines.png",device = "png",
+         width = 7, height = 7)
+  
+```
+
+## CCLE correlation with the new normalization scheme
+
+
+```{r}
+
+S1_geomeanCounts <- S1_tile_inv_norm_corr %>% 
+  filter(category %in% "variant") %>%
+  filter(Size == 600) %>%
+  dplyr::select(Tissue,geneName,corrected_counts) %>%
+  group_by(Tissue, geneName) %>%
+  summarise(geomean_counts_s1 = geometric.mean(corrected_counts))
+S1_geomeanCounts
+```
+
+### CCLE import and wrangling
+
+```{r}
+# import CCLE data
+ccle <- read_tsv("CCLE_copynumber_byGene_2013-12-03.txt")
+
+
+# cell lines from https://acepixbio.com/shop/breast-cancer-cell-pellet-array-cpa01-01-5-pack/ 
+cellLines <- c("SKBR3_BREAST","BT474_BREAST","MCF7_BREAST","MDAMB231_BREAST","MDAMB468_BREAST")
+dfE <- ccle %>% select(SYMBOL,all_of(cellLines)) %>%
+  dplyr::rename(GENE = SYMBOL) 
+dfE
+
+# SELECT ONLY CERTAIN GENES
+screen <- c("ERBB2","NCOA3",
+            "EGFR","CDKN2A","PDE4D",
+            "BRCA1","MYC","ZNF217",
+            "NKX2-1")
+screen
+screened <- dfE %>% filter(GENE %in% screen)
+screened
+
+affy <- screened %>% 
+  dplyr::rename("SKBR3" = "SKBR3_BREAST") %>%
+  dplyr::rename("BT474" = "BT474_BREAST") %>%
+  dplyr::rename("MCF7" = "MCF7_BREAST") %>%
+  dplyr::rename("MDAMB231" = "MDAMB231_BREAST") %>%
+  dplyr::rename("MDAMB468" = "MDAMB468_BREAST")
+
+# rename NKX2-1
+affy$GENE[ affy$GENE == 'NKX2-1'] = "NKX2_1" 
+
+affy
+affy_melt <- affy %>% melt() %>% 
+  dplyr::rename("Tissue" = "variable") %>%
+  dplyr::rename("affy_level" = "value") %>%
+  mutate(source = "CCLE") %>%
+  mutate(geneTissueID = paste(GENE,Tissue,sep="_"))
+affy_melt
+
+dsp_toCompare <- S1_geomeanCounts %>% 
+  filter(Tissue != "CD45H") %>% 
+  filter(Tissue != "CD45L") %>%
+  dplyr::rename("dsp_level" = "geomean_counts_s1") %>%
+  dplyr::rename("GENE" = "geneName") %>% 
+  mutate(source = "DSP") %>%
+  mutate(geneTissueID = paste(GENE,Tissue,sep="_"))
+dsp_toCompare
+
+affy_compare_df <- left_join(affy_melt %>% 
+                               select(-Tissue) %>% 
+                               select(-GENE) %>%
+                               select(-source), dsp_toCompare %>%
+                               select(-source), by="geneTissueID")
+
+
+#affy_compare_df <- bind_rows(affy_melt,dsp_toCompare)
+affy_compare_df %>% head()
+
+all_compare <- ggplot(affy_compare_df,aes(x = affy_level, y = log2(dsp_level), col=GENE)) + 
+  geom_point(size = 3) +
+      labs(x = "Affymetrix data (log2(CN/2))",
+         y = "DSP data log2(normalized counts)") +
+  theme_bw() +
+  theme(text= element_text(size = 18)) 
+
+all_compare
+all_compare %>%  ggsave(filename = "affy_comparison_all_together_CNassay_norm.png",device="png")
+
+# look at only MYC
+
+myc_plot <- ggplot(affy_compare_df %>% filter(GENE %in% "MYC"),aes(x = affy_level, y = log2(dsp_level), col=Tissue)) + 
+  geom_point(size=2) + theme_bw() + 
+      labs(x = "Affymetrix data (log2(CN/2))",
+         y = "DSP data log2(normalized counts)") +
+  stat_smooth(method = "lm", col = "grey50") +
+  theme(text= element_text(size = 18)) 
+myc_plot
+myc_plot %>% ggsave(filename = "myc_affy_to_dsp_CN_norm.png",device = "png")
+
+# do all of the genes individually
+
+comparePlot <- function(gene_to_plot){
+  ggplot(affy_compare_df %>% filter(GENE %in% gene_to_plot),
+         aes(x = affy_level, y = log2(dsp_level), col=Tissue)) + 
+  geom_point(size = 3) +
+    labs(x = "Affymetrix data (log2(CN/2))",
+         y = "DSP data log2(normalized counts)")
+}
+
+comparePlot("MYC")
+comparePlot("ERBB2")
+comparePlot("BRCA1") + stat_smooth(method="lm",col="grey50")
+
+compare_affy_plot <- ggplot(affy_compare_df,
+         aes(x = affy_level, y = log2(dsp_level), col=Tissue)) + 
+  geom_point(size = 3) +
+    labs(x = "Affymetrix data (log2(CN/2))",
+         y = "DSP data log2(normalized counts)") +
+  facet_wrap( ~ GENE, strip.position = "bottom") +
+  theme_bw() +
+  stat_smooth(method = "lm", col = "grey50") +
+  theme(text= element_text(size = 16)) 
+compare_affy_plot
+
+ggsave(compare_affy_plot,filename = "affymetrix_dsp_comparison_CNassay.png", device = "png", width = 9, height = 7)
+```
+
+
+```{r rsq calculation}
+
+# calculate all Rsq values using a linear model
+
+gene_list<- c("ERBB2","NCOA3",
+            "EGFR","CDKN2A","PDE4D",
+            "BRCA1","MYC","ZNF217",
+            "NKX2_1")
+
+rsq_list = list()
+
+for (gene in gene_list){
+
+  affy_compare_df_filter <- affy_compare_df %>% filter(GENE %in% gene)
+
+  dat <- summary(lm(affy_compare_df_filter$affy_level~affy_compare_df_filter$dsp_level))$r.squared 
+
+  print(gene)
+  print(dat)
+}
+
+
+```
 
 
