@@ -1722,4 +1722,125 @@ for (gene in gene_list){
 
 ```
 
+## Untransformed plots
 
+
+```{r}
+LOD_untrans_tile_plot <- function(dataset, category_to_plot){
+  
+  # calculate the ERCC mean and SD
+  ## find the geometric mean of the negative counts
+    ercc_geomean <- geometric.mean(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(corrected_counts) %>% as.matrix()
+      )
+  ## find the sd
+    ercc_sd <- sd(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(corrected_counts) %>% as.matrix()
+      )
+  
+  # generate the plot
+  dataset %>% 
+    filter(category %in% category_to_plot) %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = geneName, y = corrected_counts*2,fill=Tissue)) + geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    labs(title=paste(category_to_plot), 
+         y = "Tissue and reference-normalized counts x2",
+         x = "Gene") +
+    geom_hline(yintercept=ercc_geomean*2) +
+    geom_hline(yintercept = ercc_geomean*2 + 4*ercc_sd, color = "blue",lty = 2) +
+    scale_y_continuous(limits = c(1,9))
+    
+}
+var_untrans_plot <- LOD_untrans_tile_plot(S1_tile_inv_norm_corr,"variant") 
+var_untrans_plot
+
+LOD_untrans_tile_plot_forInv <- function(dataset, category_to_plot){
+  
+  # calculate the ERCC mean and SD
+  ## find the geometric mean of the negative counts
+    ercc_geomean <- geometric.mean(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(corrected_counts) %>% as.matrix()
+      )
+  ## find the sd
+    ercc_sd <- sd(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(corrected_counts) %>% as.matrix()
+      )
+  
+  # generate the plot
+  dataset %>% 
+    filter(category %in% category_to_plot) %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = chr, y = corrected_counts*2)) + geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    labs(title=paste(category_to_plot), 
+         y = "Tissue and reference-normalized counts x2",
+         x = "Gene") +
+    geom_hline(yintercept=ercc_geomean*2) +
+    geom_hline(yintercept = ercc_geomean*2 + 4*ercc_sd, color = "blue",lty = 2) +
+    scale_y_continuous(limits = c(1,9))
+    
+}
+inv_untrans_plot <- LOD_untrans_tile_plot_forInv(S1_tile_inv_norm_corr,"invariant") 
+inv_untrans_plot
+
+
+
+lod_layout <- ggarrange(var_untrans_plot,inv_untrans_plot,
+                        widths= c(2.5,1), align = "h")
+lod_layout %>% ggsave(filename = "Slide1_CNassay_normalization_untrans.png",device = "png", width = 12, height = 5)
+
+LOD_untrans_tile_plot_forMulticopy <- function(dataset, category_to_plot){
+  
+  # calculate the ERCC mean and SD
+  ## find the geometric mean of the negative counts
+    ercc_geomean <- geometric.mean(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(corrected_counts) %>% as.matrix()
+      )
+  ## find the sd
+    ercc_sd <- sd(
+      dataset %>% 
+        filter(category %in% "ercc") %>% 
+        filter(Size==600) %>% 
+        select(corrected_counts) %>% as.matrix()
+      )
+  
+  # generate the plot
+  dataset %>% 
+    filter(category %in% category_to_plot) %>% 
+    filter(Size == 600) %>% 
+    ggplot(aes(x = geneName, y =corrected_counts*2,col=Tissue)) + geom_jitter() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    labs(title=paste(category_to_plot), 
+         y = "Tissue and reference-normalized counts",
+         x = "Gene") +
+    geom_hline(yintercept=ercc_geomean*2) +
+    geom_hline(yintercept = ercc_geomean*2 + 4*ercc_sd, color = "blue",lty = 2) #+
+   #scale_y_continuous(limits = c(0.5,4.6))
+    
+}
+
+LOD_untrans_tile_plot_forMulticopy(S1_tile_inv_norm_corr,"multicopy")
+
+```
+
+
+- Multicopy plots normalized to reference don't really make sense because the reference is predicted to be at high CN.
+- Multiplication factor of 2 gets the baseline to 2N, but the predicted copy number for some of these genes doesn't match the copy number here.
+  - e.g., COSMIC sequencing data indicates 14 copies of EGFR, but the mean is around 7. The same is true for ZNF217 in MCF7. 
+  - It's likely that correcting using the breast cancer tissue cuts counts because it already has small-scale amplifications of those loci.
