@@ -1844,3 +1844,22 @@ LOD_untrans_tile_plot_forMulticopy(S1_tile_inv_norm_corr,"multicopy")
 - Multiplication factor of 2 gets the baseline to 2N, but the predicted copy number for some of these genes doesn't match the copy number here.
   - e.g., COSMIC sequencing data indicates 14 copies of EGFR, but the mean is around 7. The same is true for ZNF217 in MCF7. 
   - It's likely that correcting using the breast cancer tissue cuts counts because it already has small-scale amplifications of those loci.
+
+
+## Calculate summary stats for sequencing
+
+```{r}
+
+summ_stats <- read_tsv("DSP_CNV_e1/output_summary.txt")
+summ_stats <- summ_stats %>% mutate(pct_unique = (Unique/Aligned)*100)
+
+summ_stats %>% ggplot(aes(x=pct_unique)) +geom_histogram()
+
+tot_raw <- sum(summ_stats %>% select(Raw))
+tot_raw
+
+
+```
+
+Nearly all of the AOIs fall under 20% unique. We are aiming for about 80% sequencing saturation. This was with 514M reads. Should be okay to reduce sequencing depth. 
+
